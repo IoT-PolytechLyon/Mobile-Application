@@ -1,6 +1,7 @@
 package com.polytech.bmh.ui.login
 
 import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -14,16 +15,33 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.polytech.bmh.ChoiceConnectedDeviceActivity
+import com.polytech.bmh.NewAccountActivity
 
 import com.polytech.bmh.R
+import com.polytech.bmh.data.model.SignInBody
+import com.polytech.bmh.service.RetrofitInstance
+import com.polytech.bmh.service.SignInUser
+import kotlinx.android.synthetic.main.activity_login.*
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
+
+    //private lateinit var binding: ActivityLoginBinding
 
     private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+
+        /*binding.apply {
+            username.text = getString(R.string.email)
+        }*/
         setContentView(R.layout.activity_login)
 
         val username = findViewById<EditText>(R.id.username)
@@ -34,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel = ViewModelProviders.of(this, LoginViewModelFactory())
                 .get(LoginViewModel::class.java)
 
-        loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
+        /*loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
 
             // disable login button unless both username / password is valid
@@ -46,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
             if (loginState.passwordError != null) {
                 password.error = getString(loginState.passwordError)
             }
-        })
+        })*/
 
         loginViewModel.loginResult.observe(this@LoginActivity, Observer {
             val loginResult = it ?: return@Observer
@@ -95,6 +113,94 @@ class LoginActivity : AppCompatActivity() {
                 loginViewModel.login(username.text.toString(), password.text.toString())
             }
         }
+
+        val btConnection = findViewById<Button>(R.id.login)
+
+        btConnection.setOnClickListener {
+            val email = username.text.toString()
+            val motDePasse = password.text.toString()
+
+            if (email.isEmpty()) {
+                username.error = "L'email est requis !"
+                username.requestFocus()
+                val myToast = Toast.makeText(this, "L'email est requis !", Toast.LENGTH_SHORT)
+                myToast.show()
+                return@setOnClickListener
+            }
+
+            if (motDePasse.isEmpty()) {
+                password.error = "Le mot de passe est requis !"
+                password.requestFocus()
+                val myToast = Toast.makeText(this, "Le mot de passe est requis !", Toast.LENGTH_SHORT)
+                myToast.show()
+                return@setOnClickListener
+            }
+
+            if (motDePasse.length < 6) {
+                password.error = "Le mot de passe doit contenir au moins 6 caractères !"
+                password.requestFocus()
+                val myToast = Toast.makeText(this, "Le mot de passe doit contenir au moins 6 caractères !", Toast.LENGTH_SHORT)
+                myToast.show()
+                return@setOnClickListener
+            }
+
+            if (motDePasse.length > 32) {
+                password.error = "Le mot de passe doit contenir au plus 32 caractères !"
+                password.requestFocus()
+                val myToast = Toast.makeText(this, "Le mot de passe doit contenir au plus 32 caractères !", Toast.LENGTH_SHORT)
+                myToast.show()
+                return@setOnClickListener
+            }
+
+           signIn(email, motDePasse)
+
+        }
+
+        val btCreationAccount = findViewById<Button>(R.id.creation_compte)
+
+        btCreationAccount.setOnClickListener {
+            val NewAccountActivityIntent = Intent(this, NewAccountActivity::class.java)
+            startActivity(NewAccountActivityIntent)
+        }
+
+
+
+    }
+
+    private fun signIn(email: String, password: String) {
+        val service = RetrofitInstance.getRetrofitInstance().create(SignInUser::class.java)
+        val signInRequest = service.signIn(SignInBody(email, password))
+
+        signInRequest.enqueue(object : Callback<ResponseBody> {
+
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.code() == 200) {
+                    Toast.makeText(this@LoginActivity, "Login success!", Toast.LENGTH_SHORT)
+                        .show()
+
+                    val ChoiceConnectedDeviceActivityIntent = Intent(this@LoginActivity, ChoiceConnectedDeviceActivity::class.java)
+                    startActivity(ChoiceConnectedDeviceActivityIntent)
+
+
+                } else {
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "L'email ou/et le mot de passe est/sont incorrects",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Toast.makeText(
+                    this@LoginActivity,
+                    t.message,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+        })
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {
