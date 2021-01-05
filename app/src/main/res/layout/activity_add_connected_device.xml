@@ -7,20 +7,20 @@
     tools:context=".AddConnectedDeviceActivity">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewBackArrow"
         android:layout_width="46dp"
         android:layout_height="40dp"
         android:clickable="true"
         android:soundEffectsEnabled="false"
         android:tint="#F85F6A"
-        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintEnd_toStartOf="@+id/textViewObjectChoice"
         app:layout_constraintHorizontal_bias="0.426"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/actionModeCloseDrawable" />
 
     <Button
-        android:id="@+id/creation_compte3"
+        android:id="@+id/buttonCreateNewConnectedDevice"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="start"
@@ -35,10 +35,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextObjectRouter" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewAddConnectedDevice"
         android:layout_width="409dp"
         android:layout_height="46dp"
         android:layout_marginTop="24dp"
@@ -51,7 +51,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/editTextObjectName"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -63,10 +63,10 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewAddConnectedDevice" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/editTextObjectDescription"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginStart="16dp"
@@ -79,10 +79,10 @@
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextObjectName" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName5"
+        android:id="@+id/editTextObjectRouter"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -94,6 +94,6 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextObjectDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

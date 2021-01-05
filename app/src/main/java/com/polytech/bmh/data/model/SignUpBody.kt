@@ -4,10 +4,10 @@ data class SignUpBody(
     val lastName: String,
     val firstName: String,
     val sex: Boolean,
-    val age: Number,
+    val age: Int,
     val email: String,
     val password: String,
-    val address: String,
+    val adress: String,
     val city: String,
     val country: String
 )

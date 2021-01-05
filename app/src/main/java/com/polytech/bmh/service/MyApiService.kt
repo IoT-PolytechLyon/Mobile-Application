@@ -1,6 +1,7 @@
 package com.polytech.bmh.service
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.polytech.bmh.data.model.ConnectedDeviceAddBody
 import com.polytech.bmh.data.model.SignInBody
 import com.polytech.bmh.data.model.SignUpBody
 import com.squareup.moshi.Json
@@ -44,6 +45,11 @@ interface SignUpUser {
     fun signUp(@Body info: SignUpBody): Call<ResponseBody>
 }
 
+interface AddConnectedDevice {
+    @POST("connected-devices")
+    fun addConnectedDevice(@Body info: ConnectedDeviceAddBody): Call<ResponseBody>
+}
+
 object MyApi {
     val retrofitService : ConnectedDevicesProperties by lazy { retrofit.create(ConnectedDevicesProperties::class.java) }
 }
@@ -64,8 +70,11 @@ class RetrofitInstance {
 }
 
 data class ConnectedDeviceProperty(
-    val id_: String,
+    val _id: String,
     val name: String,
     val description: String,
     val router: String)
 
+data class ConnectedDevicePropertySubset(
+    val _id: String,
+    val name: String)
