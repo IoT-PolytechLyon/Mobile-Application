@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
+    app:startDestination="@id/loginFragment">
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.polytech.bmh.ui.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_choiceConnectedDeviceFragment"
+            app:destination="@id/choiceConnectedDeviceFragment" />
+        <action
+            android:id="@+id/action_loginFragment_self"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/choiceConnectedDeviceFragment"
+        android:name="com.polytech.bmh.ChoiceConnectedDeviceFragment"
+        android:label="ChoiceConnectedDeviceFragment" >
+        <action
+            android:id="@+id/action_choiceConnectedDeviceFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_choiceConnectedDeviceFragment_to_addConnectedDeviceFragment"
+            app:destination="@id/addConnectedDeviceFragment" />
+        <action
+            android:id="@+id/action_choiceConnectedDeviceFragment_to_selectColorFragment"
+            app:destination="@id/selectColorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addConnectedDeviceFragment"
+        android:name="com.polytech.bmh.AddConnectedDeviceFragment"
+        android:label="AddConnectedDeviceFragment" >
+        <action
+            android:id="@+id/action_addConnectedDeviceFragment_to_choiceConnectedDeviceFragment"
+            app:destination="@id/choiceConnectedDeviceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectColorFragment"
+        android:name="com.polytech.bmh.SelectColorFragment"
+        android:label="SelectColorFragment" >
+        <action
+            android:id="@+id/action_selectColorFragment_to_choiceConnectedDeviceFragment"
+            app:popUpTo="@id/choiceConnectedDeviceFragment" />
+    </fragment>
+</navigation>

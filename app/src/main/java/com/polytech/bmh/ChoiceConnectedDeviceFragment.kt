@@ -1,45 +1,110 @@
 package com.polytech.bmh
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.polytech.bmh.service.ConnectedDeviceProperty
-import com.polytech.bmh.service.ConnectedDevicePropertySubset
-import com.polytech.bmh.service.ConnectedDevicesProperties
-import com.polytech.bmh.service.RetrofitInstance
-import com.polytech.bmh.ui.login.LoginActivity
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.polytech.bmh.data.model.ConnectedDeviceProperties
+import com.polytech.bmh.data.model.ConnectedDevicePropertiesSubset
+import com.polytech.bmh.databinding.FragmentChoiceConnectedDeviceBinding
+import com.polytech.bmh.viewmodel.ChoiceConnectedDeviceViewModel
+import com.polytech.bmh.viewmodelfactory.ChoiceConnectedDeviceViewModelFactory
 
-class ChoiceConnectedDeviceActivity : AppCompatActivity() {
+class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
-    private val URL = "http://10.0.2.2:8081"
+    private lateinit var binding: FragmentChoiceConnectedDeviceBinding
+    private lateinit var viewModel: ChoiceConnectedDeviceViewModel
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
 
-    private var choiceConnectedDevice: TextView? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_choice_connected_device)
-        choiceConnectedDevice = findViewById(R.id.textView7)
-        getCurrentData()
-        //findViewById<View>(R.id.buttonValidateConnectedDevice).setOnClickListener { getCurrentData() }
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_choice_connected_device,
+            container,
+            false
+        )
 
-        //val connectedDevicesSpinner = findViewById<Spinner>(R.id.spinnerConnectedDeviceChoice)
+        val viewModelFactory = ChoiceConnectedDeviceViewModelFactory()
+        viewModel = ViewModelProvider(
+            this,
+            viewModelFactory
+        ).get(ChoiceConnectedDeviceViewModel::class.java)
 
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
-        val backArrow = findViewById<ImageView>(R.id.imageBackArrow)
+        viewModel.getConnectedDevices()
 
-        backArrow.setOnClickListener {
-            val LoginActivityIntent = Intent(this, LoginActivity::class.java)
-            startActivity(LoginActivityIntent)
+        viewModel.response.observe(viewLifecycleOwner, Observer {
+
+            val result = it ?: return@Observer
+
+            Toast.makeText(
+                this.context,
+                "${result}",
+                Toast.LENGTH_LONG
+            ).show()
+        })
+
+        viewModel.connectedDevice.observe(viewLifecycleOwner, Observer {
+            val result = it ?: return@Observer
+
+            val listConnectedDeviceProperty: List<ConnectedDeviceProperties> = result
+            val listConnectedDevicePropertySubset : MutableList<String> = mutableListOf()
+
+            for (connectedDevice in listConnectedDeviceProperty) {
+                val connectedDevicePropertySubset : ConnectedDevicePropertiesSubset = ConnectedDevicePropertiesSubset(connectedDevice._id, connectedDevice.name)
+                val connectedDevicePropertySubsetString = "Objet n°" + connectedDevicePropertySubset._id + " : " + connectedDevicePropertySubset.name
+                listConnectedDevicePropertySubset.add(connectedDevicePropertySubsetString)
+            }
+
+            var arrayAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, listConnectedDevicePropertySubset)
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+            binding.spinnerConnectedDeviceChoice?.adapter = arrayAdapter
+            binding.spinnerConnectedDeviceChoice?.onItemSelectedListener = this
+
+        })
+
+        binding.imageBackArrow.setOnClickListener {
+            this.findNavController().navigate(R.id.action_choiceConnectedDeviceFragment_to_loginFragment)
         }
 
-        val btAdd = findViewById<FloatingActionButton>(R.id.buttonAddConnectedDevice)
+        binding.buttonAddConnectedDevice.setOnClickListener {
+            this.findNavController().navigate(R.id.action_choiceConnectedDeviceFragment_to_addConnectedDeviceFragment)
+        }
+
+        binding.buttonValidateConnectedDevice.setOnClickListener {
+            this.findNavController().navigate(R.id.action_choiceConnectedDeviceFragment_to_selectColorFragment)
+        }
+
+        return binding.root
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        var items: String = parent?.getItemAtPosition(position) as String
+        Toast.makeText(this.context, "$items", Toast.LENGTH_LONG).show()
+        binding.textView7.text = items
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        Toast.makeText(this.context, "Nothing select", Toast.LENGTH_LONG).show()
+    }
+}
+
+
+
+
+      /*  val btAdd = findViewById<FloatingActionButton>(R.id.buttonAddConnectedDevice)
 
         btAdd.setOnClickListener {
             val AddConnectedDeviceActivityIntent = Intent(this, AddConnectedDeviceActivity::class.java)
@@ -85,7 +150,7 @@ class ChoiceConnectedDeviceActivity : AppCompatActivity() {
 
                         //var connectedDeviceDifferentValues = arrayListOf<List<ConnectedDevicePropertySubset>(listConnectedDevicePropertySubset)
 
-                        var arrayAdapter = ArrayAdapter(this@ChoiceConnectedDeviceActivity, android.R.layout.simple_spinner_item, listConnectedDevicePropertySubset)
+                        var arrayAdapter = ArrayAdapter(this@ChoiceConnectedDeviceFragment, android.R.layout.simple_spinner_item, listConnectedDevicePropertySubset)
                         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
                         val connectedDevicesSpinner = findViewById<Spinner>(R.id.spinnerConnectedDeviceChoice)
@@ -109,11 +174,11 @@ class ChoiceConnectedDeviceActivity : AppCompatActivity() {
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
-                    Toast.makeText(applicationContext, "Nothig select", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, "Nothing select", Toast.LENGTH_LONG).show()
 
                 }
             })
-        }
+        }*/
 
 
 
@@ -134,12 +199,12 @@ class ChoiceConnectedDeviceActivity : AppCompatActivity() {
 
 
 
-    }
+    //}
 
  /*   private var weatherData: TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_choice_connected_device)
+        setContentView(R.layout.fragment_choice_connected_device)
         weatherData = findViewById(R.id.textView7)
         findViewById<View>(R.id.creation_compte4).setOnClickListener { getCurrentData() }
     }

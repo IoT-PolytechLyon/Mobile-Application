@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import com.polytech.bmh.data.model.SignInBody
 import com.polytech.bmh.data.model.SignUpBody
 import com.polytech.bmh.service.RetrofitInstance
-import com.polytech.bmh.service.SignInUser
 import com.polytech.bmh.service.SignUpUser
-import com.polytech.bmh.ui.login.LoginActivity
+import com.polytech.bmh.ui.login.LoginFragment
 import kotlinx.android.synthetic.main.activity_new_account.*
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -71,7 +69,7 @@ class NewAccountActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
     val backArrow = findViewById<ImageView>(R.id.imageView5)
 
 backArrow.setOnClickListener {
-    val LoginActivityIntent = Intent(this, LoginActivity::class.java)
+    val LoginActivityIntent = Intent(this, LoginFragment::class.java)
     startActivity(LoginActivityIntent)
 }
 
@@ -221,7 +219,7 @@ signUpRequest.enqueue(object : Callback<ResponseBody> {
             Toast.makeText(this@NewAccountActivity, "Le compte a été créé avec succès", Toast.LENGTH_SHORT)
                 .show()
 
-            val LoginActivityIntent = Intent(this@NewAccountActivity, LoginActivity::class.java)
+            val LoginActivityIntent = Intent(this@NewAccountActivity, LoginFragment::class.java)
             startActivity(LoginActivityIntent)
 
 
