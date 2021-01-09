@@ -4,6 +4,7 @@ import com.polytech.bmh.data.Result
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceData
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceState
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceStateLed
+import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceUpdateBody
 import com.polytech.bmh.service.ConnectedDevicesProperties
 import com.polytech.bmh.service.RetrofitInstance
 import com.polytech.bmh.service.UpdateConnectedDevice
@@ -30,7 +31,7 @@ class SelectColorRepository {
                 connectedDevice.state.nfc_state, connectedDeviceLedState)
 
             val service = RetrofitInstance.getRetrofitInstance().create(UpdateConnectedDevice::class.java)
-            val updateConnectedDeviceRequest = service.updateConnectedDevice(id, ConnectedDeviceData(connectedDeviceState))
+            val updateConnectedDeviceRequest = service.updateConnectedDevice(id, ConnectedDeviceUpdateBody(connectedDeviceState))
             val result = updateConnectedDeviceRequest.await()
             return Result.Success("L'objet connecté a été modifié avec succès !")
         } catch (e: Throwable) {

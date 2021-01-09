@@ -43,6 +43,7 @@ class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedList
         binding.lifecycleOwner = this
 
         viewModel.getConnectedDevices()
+        //viewModel.getListConnectedDevicesUI()
 
         viewModel.response.observe(viewLifecycleOwner, Observer {
 
@@ -58,7 +59,20 @@ class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedList
         viewModel.connectedDevice.observe(viewLifecycleOwner, Observer {
             val result = it ?: return@Observer
 
-            val listConnectedDeviceProperty: List<ConnectedDeviceProperties> = result
+            viewModel.getListConnectedDevicesUI(result)
+
+            viewModel.connectedDeviceListUi.observe(viewLifecycleOwner, Observer {
+                val listConnectedDeviceUi = it ?: return@Observer
+
+                var arrayAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, listConnectedDeviceUi )
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+                binding.spinnerConnectedDeviceChoice?.adapter = arrayAdapter
+                binding.spinnerConnectedDeviceChoice?.onItemSelectedListener = this
+
+            })
+
+            /*val listConnectedDeviceProperty: List<ConnectedDeviceProperties> = result
             val listConnectedDevicePropertySubset : MutableList<String> = mutableListOf()
 
             for (connectedDevice in listConnectedDeviceProperty) { // POURQUOI PAS FAIRE CA DANS LE VIEWMODEL
@@ -72,13 +86,14 @@ class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedList
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
             binding.spinnerConnectedDeviceChoice?.adapter = arrayAdapter
-            binding.spinnerConnectedDeviceChoice?.onItemSelectedListener = this
+            binding.spinnerConnectedDeviceChoice?.onItemSelectedListener = this*/
 
 
         })
 
-        /*viewModel.getListConnectedDevicesUI()
-        viewModel.connectedDeviceListUi.observe(viewLifecycleOwner, Observer {
+        //viewModel.getConnectedDevices()
+        //viewModel.getListConnectedDevicesUI()
+        /*viewModel.connectedDeviceListUi.observe(viewLifecycleOwner, Observer {
             val listConnectedDeviceUi = it ?: return@Observer
 
             var arrayAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, listConnectedDeviceUi )
@@ -98,9 +113,8 @@ class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedList
         }
 
         binding.buttonValidateConnectedDevice.setOnClickListener {
-            this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.actionChoiceConnectedDeviceFragmentToSelectColorFragment(
-                viewModel.connectedDeviceSelected.value.toString()
-            ))
+            this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.
+            actionChoiceConnectedDeviceFragmentToSelectColorFragment(viewModel.connectedDeviceSelected.value!!))
             //this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.actionChoiceConnectedDeviceFragmentToSelectColorFragment(connectedDevice))
         }
 
@@ -110,8 +124,14 @@ class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedList
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         var items: String = parent?.getItemAtPosition(position) as String
         Toast.makeText(this.context, "$items", Toast.LENGTH_LONG).show()
-        binding.textView7.text = items
-        viewModel.getValue(items)
+        binding.textViewConnectedDeviceSelected.text = items
+        viewModel.connectedDevice.observe(viewLifecycleOwner, Observer {
+            val listConnectedDevice = it ?: return@Observer
+
+            viewModel.getValue(listConnectedDevice[position])
+        })
+
+
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {

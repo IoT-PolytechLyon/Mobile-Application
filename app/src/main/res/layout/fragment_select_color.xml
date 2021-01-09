@@ -9,7 +9,6 @@
             type="com.polytech.bmh.viewmodel.SelectColorViewModel" />
     </data>
 
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,6 +16,49 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="734dp">
+
+            <TextView
+                android:id="@+id/textViewRouterConnectedDevice"
+                android:layout_width="322dp"
+                android:layout_height="33dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginEnd="45dp"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewNameConnectedDevice" />
+
+            <TextView
+                android:id="@+id/textViewNameConnectedDevice"
+                android:layout_width="322dp"
+                android:layout_height="33dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="45dp"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSubtitle" />
+
+            <TextView
+                android:id="@+id/textViewSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="94dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="94dp"
+                android:text="Objet connecté selectionné :"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewChooseColor" />
 
             <View
                 android:id="@+id/viewColorSelected"
@@ -34,25 +76,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="92dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginEnd="92dp"
-                android:text="La couleur selectionnée est :"
+                android:text="La couleur actuelle des leds est :"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBoxWhiteColor" />
+                app:layout_constraintTop_toBottomOf="@+id/buttonChooseColor" />
 
             <Button
                 android:id="@+id/buttonChooseColor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="74dp"
-                android:layout_marginTop="98dp"
-                android:layout_marginEnd="74dp"
-                android:text="Cliquer pour choisir la couleur"
+                android:layout_width="327dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="44dp"
+                android:background="@color/colorPrimary"
+                android:text="Cliquer pour changer la couleur des leds"
+                android:textColor="@color/colorWhite"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewChooseColor" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewRouterConnectedDevice" />
 
             <ImageView
                 android:id="@+id/backArrowImage"
@@ -75,12 +120,14 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="92dp"
                 android:layout_marginEnd="24dp"
+                android:layout_marginBottom="90dp"
                 android:background="#F85F6A"
                 android:enabled="true"
                 android:text="Valider"
                 android:textColor="@color/design_default_color_background"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -100,19 +147,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <CheckBox
-                android:id="@+id/checkBoxWhiteColor"
-                android:layout_width="320dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="47dp"
-                android:layout_marginEnd="45dp"
-                android:text="Cochez cette case pour du blanc"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonChooseColor" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

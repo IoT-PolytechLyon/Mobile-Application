@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.polytech.bmh.data.model.*
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceData
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceState
+import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceUpdateBody
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.ResponseBody
@@ -50,7 +51,7 @@ interface AddConnectedDevice {
 
 interface UpdateConnectedDevice {
     @PUT("connected-devices/{id}")
-    fun updateConnectedDevice(@Path("id") id: String, @Body info: ConnectedDeviceData): Call<ResponseBody>
+    fun updateConnectedDevice(@Path("id") id: String, @Body info: ConnectedDeviceUpdateBody): Call<ResponseBody>
 }
 
 

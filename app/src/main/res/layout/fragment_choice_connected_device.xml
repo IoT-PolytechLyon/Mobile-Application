@@ -26,16 +26,18 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="80dp"
                 android:layout_marginEnd="24dp"
+                android:layout_marginBottom="90dp"
                 android:background="#F85F6A"
                 android:enabled="true"
                 android:text="Valider"
                 android:textColor="@color/design_default_color_background"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewConnectedDeviceSelected" />
 
             <TextView
                 android:id="@+id/textViewObjectChoice"
@@ -91,14 +93,15 @@
                 android:dropDownWidth="wrap_content"
                 android:popupBackground="@color/colorPrimary"
                 android:spinnerMode="dropdown"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewObjectChoice" />
 
             <TextView
-                android:id="@+id/textView7"
-                android:layout_width="412dp"
-                android:layout_height="30dp"
+                android:id="@+id/textViewConnectedDeviceSelected"
+                android:layout_width="410dp"
+                android:layout_height="65dp"
                 android:textAlignment="center"
                 android:textColor="#F85F6A"
                 android:textSize="18sp"

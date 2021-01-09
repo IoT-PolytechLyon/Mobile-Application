@@ -26,8 +26,8 @@ class ChoiceConnectedDeviceViewModel(private val choiceConnectedDeviceRepository
     val connectedDevice: LiveData<List<ConnectedDeviceProperties>>
         get() = _connectedDevice
 
-    private val _connectedDeviceSelected = MutableLiveData<String>()
-    val connectedDeviceSelected: LiveData<String>
+    private val _connectedDeviceSelected = MutableLiveData<ConnectedDeviceProperties>()
+    val connectedDeviceSelected: LiveData<ConnectedDeviceProperties>
         get() = _connectedDeviceSelected
 
     private val _connectedDeviceListUi = MutableLiveData<List<String>>()
@@ -53,23 +53,18 @@ class ChoiceConnectedDeviceViewModel(private val choiceConnectedDeviceRepository
         }
     }
 
-    /**
-     * voir ce qu'il y a dans connectedDevice et créer une nouvelle liste avec l'affichage que l'on veut
-     */
-    fun getListConnectedDevicesUI() {
-        getConnectedDevices()
 
+    fun getListConnectedDevicesUI(connectedDeviceList :List<ConnectedDeviceProperties>) {
         val listConnectedDevicePropertySubset : MutableList<String> = mutableListOf()
 
-        val connectedDeviceList: List<ConnectedDeviceProperties> = _connectedDevice.value!!
         for (connectedDevice in connectedDeviceList) {
-            val connectedDeviceUi = "Objet ${connectedDevice.name} : ${connectedDevice.router}"
+            val connectedDeviceUi = "${connectedDevice.name} : ${connectedDevice.router}"
             listConnectedDevicePropertySubset.add(connectedDeviceUi)
         }
         _connectedDeviceListUi.value = listConnectedDevicePropertySubset
     }
 
-    fun getValue(connectedDeviceSelected: String) {
+    fun getValue(connectedDeviceSelected: ConnectedDeviceProperties) {
         _connectedDeviceSelected.value = connectedDeviceSelected
 
     }

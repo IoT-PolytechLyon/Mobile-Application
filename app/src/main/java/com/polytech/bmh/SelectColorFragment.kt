@@ -51,10 +51,13 @@ class SelectColorFragment : Fragment() {
 
         val args = SelectColorFragmentArgs.fromBundle(requireArguments())
         var connectedDeviceSelected = args.connectedDevice
-        var tabEachWord = connectedDeviceSelected.split(" ")
-        var idConnectedDeviceSelected = tabEachWord[2]
 
-        viewModel.getConnectedDeviceById(idConnectedDeviceSelected)
+        //var tabEachWord = connectedDeviceSelected.split(" ")
+        //var idConnectedDeviceSelected = tabEachWord[2]
+
+        viewModel.getConnectedDeviceById(connectedDeviceSelected._id.toString())
+
+
 
         viewModel.connectedDevice.observe(viewLifecycleOwner, Observer {
             val connectedDevice = it ?: return@Observer
@@ -68,6 +71,8 @@ class SelectColorFragment : Fragment() {
 
             binding.viewColorSelected.setBackgroundColor(defaultColor)
 
+            binding.textViewNameConnectedDevice.text = "Nom : ${connectedDevice.name}"
+            binding.textViewRouterConnectedDevice.text = "Adresse IP : ${connectedDevice.router}"
         })
 
 
@@ -107,28 +112,9 @@ class SelectColorFragment : Fragment() {
                 greenRgb = Color.green(color)
                 blueRgb = Color.blue(color)
 
-                /*if(binding.checkBoxWhiteColor.isChecked) {
-                    redRgb = 255
-                    greenRgb = 255
-                    blueRgb = 255
-                    defaultColor = Color.rgb(redRgb, greenRgb, blueRgb)
-                }*/
-
                 binding.buttonValidateColor.setOnClickListener {
-                    if(binding.checkBoxWhiteColor.isActivated) {
-                        redRgb = 255
-                        greenRgb = 255
-                        blueRgb = 255
-                        defaultColor = Color.rgb(redRgb, greenRgb, blueRgb)
-                    }
-                    viewModel.updateConnectedDevice(idConnectedDeviceSelected, redRgb, greenRgb, blueRgb)
+                    viewModel.updateConnectedDevice(connectedDeviceSelected._id.toString(), redRgb, greenRgb, blueRgb)
                 }
-
-                /*if(binding.checkBoxWhiteColor.isActivated) {
-                    defaultColor = Color.rgb(255, 255, 255)
-                    binding.viewColorSelected.setBackgroundColor(defaultColor)
-                }*/
-
 
             }
 

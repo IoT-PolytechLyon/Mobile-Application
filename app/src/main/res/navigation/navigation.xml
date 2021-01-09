@@ -45,6 +45,6 @@
             app:popUpTo="@id/choiceConnectedDeviceFragment" />
         <argument
             android:name="connectedDevice"
-            app:argType="string" />
+            app:argType="com.polytech.bmh.data.model.ConnectedDeviceProperties" />
     </fragment>
 </navigation>
