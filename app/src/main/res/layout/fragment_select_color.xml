@@ -16,66 +16,104 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="734dp">
 
-    <ImageView
-        android:id="@+id/backArrowImage"
-        android:layout_width="46dp"
-        android:layout_height="40dp"
-        android:clickable="true"
-        android:soundEffectsEnabled="false"
-        android:tint="#F85F6A"
-        app:layout_constraintEnd_toStartOf="@+id/textViewObjectChoice"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
+            <View
+                android:id="@+id/viewColorSelected"
+                android:layout_width="116dp"
+                android:layout_height="102dp"
+                android:layout_marginStart="150dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="150dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSelectedColor" />
 
-    <Button
-        android:id="@+id/buttonValidateColor"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="start"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="143dp"
-        android:layout_marginEnd="24dp"
-        android:background="#F85F6A"
-        android:enabled="true"
-        android:text="Valider"
-        android:textColor="@color/design_default_color_background"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxWhiteColor" />
+            <TextView
+                android:id="@+id/textViewSelectedColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="92dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="92dp"
+                android:text="La couleur selectionnée est :"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkBoxWhiteColor" />
 
-    <TextView
-        android:id="@+id/textViewChooseColor"
-        android:layout_width="409dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="16dp"
-        android:text="Choisissez la couleur"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/buttonChooseColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="74dp"
+                android:layout_marginTop="98dp"
+                android:layout_marginEnd="74dp"
+                android:text="Cliquer pour choisir la couleur"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewChooseColor" />
 
-    <CheckBox
-        android:id="@+id/checkBoxWhiteColor"
-        android:layout_width="320dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="360dp"
-        android:layout_marginEnd="45dp"
-        android:text="Cochez cette case pour du blanc"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewChooseColor" />
+            <ImageView
+                android:id="@+id/backArrowImage"
+                android:layout_width="46dp"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:soundEffectsEnabled="false"
+                android:tint="#F85F6A"
+                app:layout_constraintEnd_toStartOf="@+id/textViewObjectChoice"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="?attr/actionModeCloseDrawable" />
+
+            <Button
+                android:id="@+id/buttonValidateColor"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="start"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="92dp"
+                android:layout_marginEnd="24dp"
+                android:background="#F85F6A"
+                android:enabled="true"
+                android:text="Valider"
+                android:textColor="@color/design_default_color_background"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewColorSelected" />
+
+            <TextView
+                android:id="@+id/textViewChooseColor"
+                android:layout_width="409dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="16dp"
+                android:text="Choisissez la couleur"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/checkBoxWhiteColor"
+                android:layout_width="320dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="47dp"
+                android:layout_marginEnd="45dp"
+                android:text="Cochez cette case pour du blanc"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonChooseColor" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
 </layout>

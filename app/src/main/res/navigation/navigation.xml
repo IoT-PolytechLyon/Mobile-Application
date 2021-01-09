@@ -43,5 +43,8 @@
         <action
             android:id="@+id/action_selectColorFragment_to_choiceConnectedDeviceFragment"
             app:popUpTo="@id/choiceConnectedDeviceFragment" />
+        <argument
+            android:name="connectedDevice"
+            app:argType="string" />
     </fragment>
 </navigation>

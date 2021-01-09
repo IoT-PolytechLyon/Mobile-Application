@@ -1,9 +1,11 @@
 package com.polytech.bmh.viewmodel
 
+import android.telephony.mbms.StreamingServiceInfo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.polytech.bmh.data.model.ConnectedDeviceProperties
+import com.polytech.bmh.data.model.ConnectedDevicePropertiesSubset
 import com.polytech.bmh.repository.ChoiceConnectedDeviceRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +26,14 @@ class ChoiceConnectedDeviceViewModel(private val choiceConnectedDeviceRepository
     val connectedDevice: LiveData<List<ConnectedDeviceProperties>>
         get() = _connectedDevice
 
+    private val _connectedDeviceSelected = MutableLiveData<String>()
+    val connectedDeviceSelected: LiveData<String>
+        get() = _connectedDeviceSelected
+
+    private val _connectedDeviceListUi = MutableLiveData<List<String>>()
+    val connectedDeviceListUi: LiveData<List<String>>
+        get() = _connectedDeviceListUi
+
    /*init {
         getConnectedDevices()
     }*/
@@ -43,6 +53,26 @@ class ChoiceConnectedDeviceViewModel(private val choiceConnectedDeviceRepository
         }
     }
 
+    /**
+     * voir ce qu'il y a dans connectedDevice et créer une nouvelle liste avec l'affichage que l'on veut
+     */
+    fun getListConnectedDevicesUI() {
+        getConnectedDevices()
+
+        val listConnectedDevicePropertySubset : MutableList<String> = mutableListOf()
+
+        val connectedDeviceList: List<ConnectedDeviceProperties> = _connectedDevice.value!!
+        for (connectedDevice in connectedDeviceList) {
+            val connectedDeviceUi = "Objet ${connectedDevice.name} : ${connectedDevice.router}"
+            listConnectedDevicePropertySubset.add(connectedDeviceUi)
+        }
+        _connectedDeviceListUi.value = listConnectedDevicePropertySubset
+    }
+
+    fun getValue(connectedDeviceSelected: String) {
+        _connectedDeviceSelected.value = connectedDeviceSelected
+
+    }
 
 
 }
