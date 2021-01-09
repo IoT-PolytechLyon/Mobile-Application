@@ -40,11 +40,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewConnectedDeviceSelected" />
 
             <TextView
-                android:id="@+id/textViewObjectChoice"
+                android:id="@+id/textViewConnectedDeviceChoice"
                 android:layout_width="409dp"
                 android:layout_height="46dp"
                 android:layout_marginTop="8dp"
-                android:text="Choix de l'objet"
                 android:textAlignment="center"
                 android:textSize="30sp"
                 android:textStyle="bold"
@@ -54,11 +53,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/buttonAddConnectedDevice" />
 
             <TextView
-                android:id="@+id/textViewChoice"
+                android:id="@+id/textViewConnectedDeviceOurChoice"
                 android:layout_width="409dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="260dp"
-                android:text="Votre choix :"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -96,7 +94,7 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewObjectChoice" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewConnectedDeviceChoice" />
 
             <TextView
                 android:id="@+id/textViewConnectedDeviceSelected"
@@ -109,7 +107,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewChoice" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewConnectedDeviceOurChoice" />
 
             <ImageView
                 android:id="@+id/imageBackArrow"

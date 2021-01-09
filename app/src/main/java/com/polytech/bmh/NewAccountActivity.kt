@@ -66,7 +66,7 @@ class NewAccountActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
 
 
 
-    val backArrow = findViewById<ImageView>(R.id.imageView5)
+    val backArrow = findViewById<ImageView>(R.id.imageViewBackArrow)
 
 backArrow.setOnClickListener {
     val LoginActivityIntent = Intent(this, LoginFragment::class.java)

@@ -55,6 +55,14 @@ class AddConnectedDeviceFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        binding.apply {
+            textViewAddConnectedDevice.text = getString(R.string.add_connected_device)
+            editTextObjectName.hint = getString(R.string.connected_device_name)
+            editTextObjectDescription.hint = getString(R.string.connected_device_description)
+            editTextObjectRouter.hint = getString(R.string.connected_device_router)
+            buttonCreateNewConnectedDevice.text = getString(R.string.create_new_connected_device)
+        }
+
         val connectedDeviceName = binding.editTextObjectName
         val connectedDeviceDescription = binding.editTextObjectDescription
         val connectedDeviceRouter = binding.editTextObjectRouter
@@ -76,32 +84,6 @@ class AddConnectedDeviceFragment : Fragment() {
 
             viewModel.addConnectedDevice(connectedDeviceNameValue, connectedDeviceDescriptionValue, connectedDeviceRouterValue)
 
-           /* if(connectedDeviceNameValue.isEmpty()) {
-                connectedDeviceName.error = "Le nom de l'objet connecté est requis !"
-                connectedDeviceName.requestFocus()
-                val myToast = Toast.makeText(this.context, "Le nom de l'objet connecté est requis !", Toast.LENGTH_SHORT)
-                myToast.show()
-                return@setOnClickListener
-            }
-
-            if(connectedDeviceDescriptionValue.isEmpty()) {
-                connectedDeviceDescription.error = "La description de l'objet connecté est requise !"
-                connectedDeviceDescription.requestFocus()
-                val myToast = Toast.makeText(this.context, "La description de l'objet connecté est requise !", Toast.LENGTH_SHORT)
-                myToast.show()
-                return@setOnClickListener
-            }
-
-            if(connectedDeviceRouterValue.isEmpty()) {
-                connectedDeviceRouter.error = "La valeur du routeur de l'objet connecté est requis !"
-                connectedDeviceRouter.requestFocus()
-                val myToast = Toast.makeText(this.context, "La valeur du routeur de l'objet connecté est requis !", Toast.LENGTH_SHORT)
-                myToast.show()
-                return@setOnClickListener
-            }
-
-            addObject(connectedDeviceNameValue, connectedDeviceDescriptionValue, connectedDeviceRouterValue) */
-
         }
 
         viewModel.response.observe(viewLifecycleOwner, Observer {
@@ -114,16 +96,6 @@ class AddConnectedDeviceFragment : Fragment() {
                 addConnectedDeviceFailed(response.error)
             }
         })
-
-        /*viewModel.addConnectedDeviceBody.observe(viewLifecycleOwner, Observer {
-
-            val connectedDeviceBody = it ?: return@Observer
-
-            if (connectedDeviceBody != null) {
-
-            }
-
-        })*/
 
         viewModel.addConnectedDeviceBodyState.observe(viewLifecycleOwner, Observer {
             val connectedDeviceValidate = it ?: return@Observer
@@ -169,8 +141,6 @@ class AddConnectedDeviceFragment : Fragment() {
             "$success",
             Toast.LENGTH_LONG
         ).show()
-
-        //this.findNavController().navigate(R.id.action_addConnectedDeviceFragment_to_choiceConnectedDeviceFragment)
     }
 
     private fun addConnectedDeviceFailed(error: String) {
@@ -183,41 +153,4 @@ class AddConnectedDeviceFragment : Fragment() {
 
         this.findNavController().navigate(R.id.action_loginFragment_self)
     }
-
-    /*private fun addObject(name: String, description: String, router: String) {
-        val service = RetrofitInstance.getRetrofitInstance().create(AddConnectedDevice::class.java)
-        val addConnectedDeviceRequest = service.addConnectedDevice(ConnectedDeviceAddBody(name, description, router))
-
-        addConnectedDeviceRequest.enqueue(object : Callback<ResponseBody> {
-
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                if (response.code() == 201) {
-                    Toast.makeText(this@AddConnectedDeviceFragment,
-                        "L'object connecté $name a été créé avec succès", Toast.LENGTH_SHORT)
-                        .show()
-
-                    val ChoiceConnectedDeviceActivityIntent = Intent(this@AddConnectedDeviceFragment, ChoiceConnectedDeviceFragment::class.java)
-                    startActivity(ChoiceConnectedDeviceActivityIntent)
-
-                } else {
-                    val errorMessage = Gson().fromJson(response.body()?.string().toString(), MessageError::class.java).message.message
-                    Toast.makeText(
-                        this@AddConnectedDeviceFragment,
-                        "L'objet connecté ne peut pas être créé : $errorMessage",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Toast.makeText(
-                    this@AddConnectedDeviceFragment,
-                    t.message,
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-        })
-    }*/
 }

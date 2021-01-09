@@ -43,6 +43,15 @@ class LoginFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        binding.apply {
+            textViewIoT.text = getString(R.string.title_iot)
+            textViewConnexion.text = getString(R.string.connexion)
+            textViewEmail.text = getString(R.string.email)
+            textViewPassword.text = getString(R.string.password)
+            buttonConnexion.text = getString(R.string.connexion)
+            buttonNewAccount.text = getString(R.string.creation_account)
+        }
+
         viewModel.loginResponseBody.observe(viewLifecycleOwner, Observer {
 
             val loginRes = it ?: return@Observer

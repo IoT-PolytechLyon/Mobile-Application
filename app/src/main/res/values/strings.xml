@@ -1,22 +1,39 @@
 <resources>
     <string name="app_name">Bright My Home</string>
     <!-- Strings related to login -->
-    <string name="email">Email : </string>
-    <string name="mot_de_passe">Mot de passe : </string>
+    <string name="email">Email :</string>
+    <string name="password">Mot de passe :</string>
     <string name="connexion">Connexion</string>
-    <string name="creation_compte">Créer un compte</string>
+    <string name="creation_account">Créer un compte</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be > 5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_new_account">NewAccountActivity</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
-    <string name="hello_world">Hello Square World!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_iot">IoT</string>
+
+    <!-- Strings related to adding a connected device -->
+    <string name="connected_device_name">Nom de l\'objet</string>
+    <string name="connected_device_description">Description de l\'objet</string>
+    <string name="connected_device_router">Routeur de l\'objet (IP du routeur)</string>
+    <string name="add_connected_device">Ajout d\'un objet connecté</string>
+    <string name="create_new_connected_device">Créer le nouvel objet</string>
+
+    <!-- Strings related to choosing a connected device -->
+    <string name="connected_device_choice">Choix de l\'objet</string>
+    <string name="connected_device_your_choice">Votre choix :</string>
+    <string name="connected_device_validate_choice">Valider</string>
+
+    <!-- Strings related to choosing leds color -->
+    <string name="choose_color">Choisissez la couleur</string>
+    <string name="selected_connected_device">Objet connecté selectionné :</string>
+    <string name="change_leds_color">Cliquer pour changer la couleur des leds</string>
+    <string name="current_color_leds">La couleur actuelle des leds est :</string>
+    <string name="validate_leds_color">Valider</string>
+
+
+
+
+
 </resources>

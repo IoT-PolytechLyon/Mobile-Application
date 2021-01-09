@@ -40,6 +40,15 @@ class SelectColorFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        binding.apply {
+            textViewChooseColor.text = getString(R.string.choose_color)
+            textViewSubtitle.text = getString(R.string.selected_connected_device)
+            buttonChooseColor.text = getString(R.string.change_leds_color)
+            textViewSelectedColor.text = getString(R.string.current_color_leds)
+            buttonValidateColor.text = getString(R.string.validate_leds_color)
+
+        }
+
         var defaultColor = 0
         var redRgb = 0
         var greenRgb = 0

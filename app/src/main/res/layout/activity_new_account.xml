@@ -12,13 +12,13 @@
     tools:context=".NewAccountActivity">
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imageViewBackArrow"
         android:layout_width="46dp"
         android:layout_height="40dp"
         android:clickable="true"
         android:soundEffectsEnabled="false"
         android:tint="#F85F6A"
-        app:layout_constraintEnd_toStartOf="@+id/textViewObjectChoice"
+        app:layout_constraintEnd_toStartOf="@+id/textViewConnectedDeviceChoice"
         app:layout_constraintHorizontal_bias="0.426"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
