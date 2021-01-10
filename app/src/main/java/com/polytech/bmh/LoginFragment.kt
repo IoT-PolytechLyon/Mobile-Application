@@ -17,7 +17,7 @@ import androidx.navigation.fragment.findNavController
 
 import com.polytech.bmh.databinding.FragmentLoginBinding
 import com.polytech.bmh.data.model.user.signin.LoggedInUserView
-import com.polytech.bmh.ui.login.LoginFragmentDirections
+//import com.polytech.bmh.ui.login.LoginFragmentDirections
 import com.polytech.bmh.viewmodel.LoginViewModel
 import com.polytech.bmh.viewmodelfactory.LoginViewModelFactory
 import kotlinx.android.synthetic.main.fragment_login.*

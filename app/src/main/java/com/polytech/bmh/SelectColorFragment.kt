@@ -81,12 +81,6 @@ class SelectColorFragment : Fragment() {
 
         viewModel.response.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
-
-            Toast.makeText(
-                this.context,
-                "$response",
-                Toast.LENGTH_LONG
-            ).show()
         })
 
         var colorPicker = object: ColorPickerPopup.ColorPickerObserver() {
