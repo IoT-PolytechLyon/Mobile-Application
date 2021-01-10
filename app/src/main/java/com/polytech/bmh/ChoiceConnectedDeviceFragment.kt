@@ -49,14 +49,7 @@ class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedList
         viewModel.getConnectedDevices()
 
         viewModel.response.observe(viewLifecycleOwner, Observer {
-
             val result = it ?: return@Observer
-
-            Toast.makeText(
-                this.context,
-                "${result}",
-                Toast.LENGTH_LONG
-            ).show()
         })
 
         viewModel.connectedDevice.observe(viewLifecycleOwner, Observer {

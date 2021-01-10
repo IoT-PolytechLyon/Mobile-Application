@@ -34,25 +34,18 @@ class ChoiceConnectedDeviceViewModel(private val choiceConnectedDeviceRepository
     val connectedDeviceListUi: LiveData<List<String>>
         get() = _connectedDeviceListUi
 
-   /*init {
-        getConnectedDevices()
-    }*/
-
     fun getConnectedDevices() {
 
         uiScope.launch {
             try {
                 val result = choiceConnectedDeviceRepository.getConnectedDevice()
-                _response.value = "Success: ${result.size} connected devices retrieved"
                 _connectedDevice.value = result
             } catch (e: Exception) {
-                _response.value = "Failure: ${e.message}"
                 _connectedDevice.value = null
             }
 
         }
     }
-
 
     fun getListConnectedDevicesUI(connectedDeviceList :List<ConnectedDeviceProperties>) {
         val listConnectedDevicePropertySubset : MutableList<String> = mutableListOf()
@@ -68,6 +61,4 @@ class ChoiceConnectedDeviceViewModel(private val choiceConnectedDeviceRepository
         _connectedDeviceSelected.value = connectedDeviceSelected
 
     }
-
-
 }
