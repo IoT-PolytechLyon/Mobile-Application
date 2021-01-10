@@ -21,13 +21,13 @@ data class ConnectedDeviceProperties(
 
     @NonNull
     @ColumnInfo(name = "_id")
-    public var _id: String? = "",
+    var _id: String? = "",
     @ColumnInfo(name = "name")
-    public var name: String? = "",
+    var name: String? = "",
     @ColumnInfo(name = "description")
-    public var description: String? = "",
+    var description: String? = "",
     @ColumnInfo(name = "router")
-    public var router: String? = ""
+    var router: String? = ""
 ) : Parcelable, BaseObservable() {
 
 
