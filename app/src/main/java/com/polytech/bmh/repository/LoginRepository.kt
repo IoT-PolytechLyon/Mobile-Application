@@ -16,7 +16,7 @@ class LoginRepository {
             val signInRequest = service.signIn(SignInBody(email, password))
             var result = signInRequest.await()
             return Result.Success(SignInBody(email, password))
-        } catch(e: Throwable) {
+        } catch (e: Throwable) {
             return Result.Error(IOException("Erreur lors de la connexion", e))
         }
     }

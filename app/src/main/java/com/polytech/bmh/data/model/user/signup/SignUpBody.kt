@@ -1,4 +1,4 @@
-package com.polytech.bmh.data.model
+package com.polytech.bmh.data.model.user.signup
 
 data class SignUpBody(
     val lastName: String,

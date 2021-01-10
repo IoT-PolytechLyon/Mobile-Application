@@ -2,14 +2,12 @@ package com.polytech.bmh.ui.login
 
 import android.app.Activity
 import android.content.Context
-import android.hardware.input.InputManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,7 +17,6 @@ import com.polytech.bmh.MainActivity
 
 
 import com.polytech.bmh.R
-import com.polytech.bmh.Utils
 import com.polytech.bmh.databinding.FragmentLoginBinding
 import com.polytech.bmh.viewmodel.LoginViewModel
 import com.polytech.bmh.viewmodelfactory.LoginViewModelFactory
@@ -97,7 +94,7 @@ class LoginFragment : Fragment() {
                     val email = binding.editTextEmail.text.toString()
                     val password = binding.editTextPassword.text.toString()
 
-                    viewModel.signInFormChanged(email, password)
+                    viewModel.signInFormValidate(email, password)
 
                     if (viewModel.signInFormBodyState.value!!.isDataValid) {
                         viewModel.signIn(email, password)
@@ -107,11 +104,7 @@ class LoginFragment : Fragment() {
                 }
 
                 binding.buttonNewAccount.setOnClickListener {
-
-                   // this.findNavController().navigate(R.id.ac)
-                    //this.findNavController().navigate()
-                    //val NewAccountActivityIntent = Intent(this, NewAccountActivity::class.java)
-                    //startActivity(NewAccountActivityIntent)
+                    this.findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToNewAccountFragment())
                 }
 
         return binding.root
@@ -126,7 +119,7 @@ class LoginFragment : Fragment() {
             Toast.LENGTH_LONG
         ).show()
 
-        this.findNavController().navigate(R.id.action_loginFragment_self)
+        this.findNavController().navigate(LoginFragmentDirections.actionLoginFragmentSelf())
     }
 
     private fun updateUI(model: LoggedInUserView) {
@@ -140,8 +133,7 @@ class LoginFragment : Fragment() {
 
         hideKeyboard(activity as MainActivity)
 
-        this.findNavController().navigate(R.id.action_loginFragment_to_choiceConnectedDeviceFragment)
-
+        this.findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToChoiceConnectedDeviceFragment())
     }
 
     private fun hideKeyboard(activity: Activity) {

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_loginFragment_self"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_newAccountFragment"
+            app:destination="@id/newAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/choiceConnectedDeviceFragment"
@@ -46,5 +49,16 @@
         <argument
             android:name="connectedDevice"
             app:argType="com.polytech.bmh.data.model.ConnectedDeviceProperties" />
+    </fragment>
+    <fragment
+        android:id="@+id/newAccountFragment"
+        android:name="com.polytech.bmh.NewAccountFragment"
+        android:label="NewAccountFragment" >
+        <action
+            android:id="@+id/action_newAccountFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_newAccountFragment_self"
+            app:destination="@id/newAccountFragment" />
     </fragment>
 </navigation>

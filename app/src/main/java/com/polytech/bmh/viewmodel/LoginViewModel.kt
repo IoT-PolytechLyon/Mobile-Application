@@ -1,9 +1,6 @@
 package com.polytech.bmh.viewmodel
 
-import android.content.res.Resources
-import android.provider.Settings.Global.getString
 import android.util.Patterns
-import androidx.core.content.res.TypedArrayUtils.getText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -54,7 +51,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         return password.length in 6..32
     }
 
-    fun signInFormChanged(email: String, password: String) {
+    fun signInFormValidate(email: String, password: String) {
 
         if(!isEmailValid(email)) {
             signInFormState.value = SignInBodyState(emailError = "L'email est invalide !")

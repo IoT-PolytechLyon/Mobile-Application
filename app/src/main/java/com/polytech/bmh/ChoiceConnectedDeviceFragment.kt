@@ -97,7 +97,6 @@ class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedList
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         var items: String = parent?.getItemAtPosition(position) as String
-        Toast.makeText(this.context, "$items", Toast.LENGTH_LONG).show()
         binding.textViewConnectedDeviceSelected.text = items
         viewModel.connectedDevice.observe(viewLifecycleOwner, Observer {
             val listConnectedDevice = it ?: return@Observer
