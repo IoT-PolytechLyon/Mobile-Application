@@ -13,6 +13,17 @@
     <string name="title_activity_new_account">NewAccountActivity</string>
     <string name="title_iot">IoT</string>
 
+    <!-- Strings related to creating a new account -->
+    <string name="title_create_new_account">Création de compte</string>
+    <string name="user_last_name">Nom</string>
+    <string name="user_first_name">Prénom</string>
+    <string name="user_age">Age</string>
+    <string name="user_email">Email (sera votre identifiant)</string>
+    <string name="user_password">Mot de passe</string>
+    <string name="user_address">Adresse</string>
+    <string name="user_city">Ville</string>
+    <string name="create_new_account">Créer mon compte</string>
+
     <!-- Strings related to adding a connected device -->
     <string name="connected_device_name">Nom de l\'objet</string>
     <string name="connected_device_description">Description de l\'objet</string>

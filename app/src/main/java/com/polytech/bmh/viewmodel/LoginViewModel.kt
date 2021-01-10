@@ -4,12 +4,11 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.polytech.bmh.R
 import com.polytech.bmh.data.Result
 import com.polytech.bmh.data.model.SignInBodyState
 import com.polytech.bmh.data.model.SignInResult
 import com.polytech.bmh.repository.LoginRepository
-import com.polytech.bmh.ui.login.LoggedInUserView
+import com.polytech.bmh.data.model.user.signin.LoggedInUserView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.*

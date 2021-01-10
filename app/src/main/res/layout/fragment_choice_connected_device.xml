@@ -116,7 +116,7 @@
                 android:layout_marginTop="8dp"
                 android:clickable="true"
                 android:soundEffectsEnabled="false"
-                android:tint="#F85F6A"
+                app:tint="#F85F6A"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="?attr/actionModeCloseDrawable"
                 tools:layout_editor_absoluteX="0dp" />

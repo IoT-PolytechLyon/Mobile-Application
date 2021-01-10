@@ -1,4 +1,4 @@
-package com.polytech.bmh.ui.login
+package com.polytech.bmh.data.model.user.signin
 
 /**
  * User details post authentication that is exposed to the UI

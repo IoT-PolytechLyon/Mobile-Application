@@ -61,12 +61,7 @@ class SelectColorFragment : Fragment() {
         val args = SelectColorFragmentArgs.fromBundle(requireArguments())
         var connectedDeviceSelected = args.connectedDevice
 
-        //var tabEachWord = connectedDeviceSelected.split(" ")
-        //var idConnectedDeviceSelected = tabEachWord[2]
-
         viewModel.getConnectedDeviceById(connectedDeviceSelected._id.toString())
-
-
 
         viewModel.connectedDevice.observe(viewLifecycleOwner, Observer {
             val connectedDevice = it ?: return@Observer
@@ -84,19 +79,6 @@ class SelectColorFragment : Fragment() {
             binding.textViewRouterConnectedDevice.text = "Adresse IP : ${connectedDevice.router}"
         })
 
-
-        //viewModel.getConnectedDeviceById(idConnectedDeviceSelected)
-
-        /*viewModel.connectedDevice.observe(viewLifecycleOwner, Observer {
-            val connectedDeviceCurrent = it ?: return@Observer
-
-            Toast.makeText(
-                this.context,
-                "${connectedDeviceCurrent._id} ${connectedDeviceCurrent.name} ${connectedDeviceCurrent.router}",
-                Toast.LENGTH_LONG
-            ).show()
-        })*/
-
         viewModel.response.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
 
@@ -111,11 +93,6 @@ class SelectColorFragment : Fragment() {
             override fun onColorPicked(color: Int) {
                 defaultColor = color
                 binding.viewColorSelected.setBackgroundColor(defaultColor)
-
-
-                //var redRgb = Color.red(color)
-                //var greenRgb = Color.green(color)
-                //var blueRgb = Color.blue(color)
 
                 redRgb = Color.red(color)
                 greenRgb = Color.green(color)
@@ -140,33 +117,11 @@ class SelectColorFragment : Fragment() {
 
         }
 
-
-
-        /*binding.buttonValidateColor.setOnClickListener {
-            if(binding.checkBoxWhiteColor.isChecked) {
-                redRgb = 255
-                greenRgb = 255
-                blueRgb = 255
-                defaultColor = Color.rgb(redRgb, greenRgb, blueRgb)
-                viewModel.updateConnectedDevice(
-                    idConnectedDeviceSelected,
-                    redRgb,
-                    greenRgb,
-                    blueRgb
-                )
-            }
-        }*/
-
-
-
-
-
-
         binding.buttonChooseColor.setOnClickListener {
             chooseColor.onClick(view)
+        }
 
 
-                }
         return binding.root
         }
 

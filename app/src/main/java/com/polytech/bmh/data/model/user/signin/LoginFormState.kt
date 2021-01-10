@@ -1,4 +1,4 @@
-package com.polytech.bmh.ui.login
+package com.polytech.bmh.data.model.user.signin
 
 /**
  * Data validation state of the login form.

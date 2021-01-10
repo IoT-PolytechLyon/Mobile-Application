@@ -4,11 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.polytech.bmh.data.Result
-import com.polytech.bmh.data.model.SignInBodyState
-import com.polytech.bmh.data.model.SignInResult
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceData
 import com.polytech.bmh.repository.SelectColorRepository
-import com.polytech.bmh.ui.login.LoggedInUserView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

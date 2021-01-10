@@ -18,9 +18,9 @@ class NewAccountViewModel(private val newAccountRepository: NewAccountRepository
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val _signUpResponse = MutableLiveData<SignUpBody>()
-    val signUpResponse: LiveData<SignUpBody>
-        get() = _signUpResponse
+    private val _signUpResult = MutableLiveData<Result<SignUpBody>>()
+    val signUpResult: LiveData<Result<SignUpBody>>
+        get() = _signUpResult
 
     private val _signUpFormState = MutableLiveData<SignUpBodyState>()
     val signUpFormState: LiveData<SignUpBodyState>
@@ -39,9 +39,9 @@ class NewAccountViewModel(private val newAccountRepository: NewAccountRepository
             val result = newAccountRepository.signUp(lastName, firstName, sexBoolean, ageInt, email, password, address, city, country)
 
             if (result is Result.Success) {
-                _signUpResponse.value = SignUpBody(lastName, firstName, sexBoolean, ageInt, email, password, address, city, country)
+                _signUpResult.value = result
             } else {
-                _signUpResponse.value = null
+                _signUpResult.value = result
             }
         }
     }
@@ -52,7 +52,6 @@ class NewAccountViewModel(private val newAccountRepository: NewAccountRepository
         if (age != "") {
              ageInt = age.toInt()
         }
-
 
         if(!isLastNameValid(lastName)) {
             _signUpFormState.value = SignUpBodyState(lastNameError = "Le nom est requis !")
@@ -109,7 +108,6 @@ class NewAccountViewModel(private val newAccountRepository: NewAccountRepository
     fun listOfCountries() : List<String> {
         return arrayOf("France", "Belgique", "Angleterre", "Allemagne", "États-Unis", "Espagne", "Portugal").toList()
     }
-
 
 
 }

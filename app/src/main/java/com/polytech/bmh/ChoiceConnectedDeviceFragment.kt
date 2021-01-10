@@ -89,7 +89,6 @@ class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedList
         binding.buttonValidateConnectedDevice.setOnClickListener {
             this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.
             actionChoiceConnectedDeviceFragmentToSelectColorFragment(viewModel.connectedDeviceSelected.value!!))
-            //this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.actionChoiceConnectedDeviceFragmentToSelectColorFragment(connectedDevice))
         }
 
         return binding.root

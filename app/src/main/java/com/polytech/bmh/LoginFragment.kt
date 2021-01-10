@@ -1,4 +1,4 @@
-package com.polytech.bmh.ui.login
+package com.polytech.bmh
 
 import android.app.Activity
 import android.content.Context
@@ -13,11 +13,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.polytech.bmh.MainActivity
 
 
-import com.polytech.bmh.R
 import com.polytech.bmh.databinding.FragmentLoginBinding
+import com.polytech.bmh.data.model.user.signin.LoggedInUserView
+import com.polytech.bmh.ui.login.LoginFragmentDirections
 import com.polytech.bmh.viewmodel.LoginViewModel
 import com.polytech.bmh.viewmodelfactory.LoginViewModelFactory
 import kotlinx.android.synthetic.main.fragment_login.*

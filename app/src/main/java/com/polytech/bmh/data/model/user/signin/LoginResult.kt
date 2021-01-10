@@ -1,4 +1,4 @@
-package com.polytech.bmh.ui.login
+package com.polytech.bmh.data.model.user.signin
 
 /**
  * Authentication result : success (user details) or error message.

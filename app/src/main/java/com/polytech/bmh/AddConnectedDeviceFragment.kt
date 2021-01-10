@@ -1,32 +1,19 @@
 package com.polytech.bmh
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.google.gson.Gson
-import com.polytech.bmh.data.model.ConnectedDeviceAddBody
 import com.polytech.bmh.databinding.FragmentAddConnectedDeviceBinding
 import com.polytech.bmh.service.*
-import com.polytech.bmh.ui.login.LoggedInUserView
 import com.polytech.bmh.viewmodel.AddConnectedDeviceViewModel
-import com.polytech.bmh.viewmodel.ChoiceConnectedDeviceViewModel
 import com.polytech.bmh.viewmodelfactory.AddConnectedDeviceViewModelFactory
-import com.polytech.bmh.viewmodelfactory.ChoiceConnectedDeviceViewModelFactory
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class AddConnectedDeviceFragment : Fragment() {
 

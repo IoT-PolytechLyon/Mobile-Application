@@ -5,7 +5,7 @@
     app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.polytech.bmh.ui.login.LoginFragment"
+        android:name="com.polytech.bmh.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_choiceConnectedDeviceFragment"
