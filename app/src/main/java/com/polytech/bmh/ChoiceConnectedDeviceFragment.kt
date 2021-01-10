@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.polytech.bmh.data.database.Database
+import com.polytech.bmh.data.database.dao.ConnectedDeviceDao
 import com.polytech.bmh.databinding.FragmentChoiceConnectedDeviceBinding
 import com.polytech.bmh.viewmodel.ChoiceConnectedDeviceViewModel
 import com.polytech.bmh.viewmodelfactory.ChoiceConnectedDeviceViewModelFactory
@@ -18,6 +20,7 @@ class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedList
 
     private lateinit var binding: FragmentChoiceConnectedDeviceBinding
     private lateinit var viewModel: ChoiceConnectedDeviceViewModel
+    private lateinit var dataSource: ConnectedDeviceDao
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +34,9 @@ class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedList
             false
         )
 
-        val viewModelFactory = ChoiceConnectedDeviceViewModelFactory()
+        val application = requireNotNull(this.activity).application
+        dataSource = Database.getInstance(application).connectedDevicesDao
+        val viewModelFactory = ChoiceConnectedDeviceViewModelFactory(dataSource)
         viewModel = ViewModelProvider(
             this,
             viewModelFactory
@@ -70,7 +75,6 @@ class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedList
 
 
         })
-
         binding.imageBackArrow.setOnClickListener {
             this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.actionChoiceConnectedDeviceFragmentToLoginFragment())
         }

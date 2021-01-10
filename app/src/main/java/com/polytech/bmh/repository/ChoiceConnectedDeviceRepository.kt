@@ -12,7 +12,7 @@ class ChoiceConnectedDeviceRepository {
         val service = RetrofitInstance.getRetrofitInstance().create(ConnectedDevicesProperties::class.java)
         val connectedDeviceRequest = service.getConnectedDevices()
         var result = connectedDeviceRequest.await()
-
+        println(result)
         return result
     }
 }

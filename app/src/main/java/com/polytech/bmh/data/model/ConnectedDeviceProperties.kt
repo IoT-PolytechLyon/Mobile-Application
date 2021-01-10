@@ -2,20 +2,44 @@ package com.polytech.bmh.data.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.Keep
+import androidx.annotation.NonNull
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.polytech.bmh.BR
 
+@Keep
+@Entity(tableName = "connected_devices")
 data class ConnectedDeviceProperties(
-    val _id: String?,
-    val name: String?,
-    val description: String?,
-    val router: String?
-) : Parcelable {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "generatedId")
+    var generatedId: Long = 0L,
+
+    @NonNull
+    @ColumnInfo(name = "_id")
+    public var _id: String? = "",
+    @ColumnInfo(name = "name")
+    public var name: String? = "",
+    @ColumnInfo(name = "description")
+    public var description: String? = "",
+    @ColumnInfo(name = "router")
+    public var router: String? = ""
+) : Parcelable, BaseObservable() {
+
+
+
+
     constructor(parcel: Parcel) : this(
+        parcel.readLong(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(_id)
