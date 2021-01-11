@@ -18,27 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/buttonValidateConnectedDevice"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="start"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="80dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="90dp"
-                android:background="#F85F6A"
-                android:enabled="true"
-                android:text="Valider"
-                android:textColor="@color/design_default_color_background"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewConnectedDeviceSelected" />
-
             <TextView
                 android:id="@+id/textViewConnectedDeviceChoice"
                 android:layout_width="409dp"
@@ -51,19 +30,6 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/buttonAddConnectedDevice" />
-
-            <TextView
-                android:id="@+id/textViewConnectedDeviceOurChoice"
-                android:layout_width="409dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="260dp"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerConnectedDeviceChoice" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/buttonAddConnectedDevice"
@@ -79,35 +45,19 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:drawable/ic_input_add" />
 
-            <Spinner
-                android:id="@+id/spinnerConnectedDeviceChoice"
-                style="@style/Widget.AppCompat.DropDownItem.Spinner"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonConnectedDeviceChoice"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="38dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="16dp"
-                android:background="@xml/spinner"
                 android:dropDownWidth="wrap_content"
-                android:popupBackground="@color/colorPrimary"
-                android:spinnerMode="dropdown"
                 android:textAlignment="center"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewConnectedDeviceChoice" />
-
-            <TextView
-                android:id="@+id/textViewConnectedDeviceSelected"
-                android:layout_width="410dp"
-                android:layout_height="65dp"
-                android:textAlignment="center"
-                android:textColor="#F85F6A"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewConnectedDeviceOurChoice" />
 
             <ImageView
                 android:id="@+id/imageBackArrow"

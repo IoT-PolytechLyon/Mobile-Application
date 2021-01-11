@@ -16,8 +16,7 @@ class SelectColorRepository {
     suspend fun getConnectedDeviceById(id: String) : ConnectedDeviceData {
             val service = RetrofitInstance.getRetrofitInstance().create(ConnectedDevicesProperties::class.java)
             val getConnectedDeviceByIdRequest = service.getConnectedDevicesById(id)
-            var result = getConnectedDeviceByIdRequest.await()
-            return result
+            return getConnectedDeviceByIdRequest.await()
     }
 
     suspend fun updateConnectedDevice(id: String, redRgb: Int, greenRgb: Int, blueRgb: Int) : Result<String> {

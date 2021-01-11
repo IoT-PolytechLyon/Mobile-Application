@@ -12,5 +12,5 @@ interface ConnectedDeviceDao {
     fun insert(connectedDevice: ConnectedDeviceProperties): Long
 
     @Query("SELECT * from connected_devices")
-    fun get() : List<ConnectedDeviceProperties>
+    fun getConnectedDevices() : List<ConnectedDeviceProperties>
 }

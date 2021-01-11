@@ -1,15 +1,11 @@
 package com.polytech.bmh.viewmodel
 
-import android.telephony.mbms.StreamingServiceInfo
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.polytech.bmh.data.database.dao.ConnectedDeviceDao
 import com.polytech.bmh.data.model.ConnectedDeviceProperties
-import com.polytech.bmh.data.model.ConnectedDevicePropertiesSubset
 import com.polytech.bmh.repository.ChoiceConnectedDeviceRepository
-import com.polytech.bmh.service.ConnectedDevicesProperties
 import kotlinx.coroutines.*
 import java.lang.Exception
 
@@ -78,7 +74,7 @@ class ChoiceConnectedDeviceViewModel(
     {
         return withContext(Dispatchers.IO)
         {
-            val devices = dataSource.get()
+            val devices = dataSource.getConnectedDevices()
 
             devices
         }
