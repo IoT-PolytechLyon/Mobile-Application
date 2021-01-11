@@ -9,193 +9,205 @@
             type="com.polytech.bmh.viewmodel.NewAccountViewModel" />
     </data>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageViewBackArrow"
+            android:layout_width="46dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            android:soundEffectsEnabled="false"
+            app:layout_constraintEnd_toStartOf="@+id/textViewConnectedDeviceChoice"
+            app:layout_constraintHorizontal_bias="0.426"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="?attr/actionModeCloseDrawable"
+            app:tint="#F85F6A" />
+
+        <EditText
+            android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="6sp">
-    <ImageView
-        android:id="@+id/imageViewBackArrow"
-        android:layout_width="46dp"
-        android:layout_height="40dp"
-        android:clickable="true"
-        android:soundEffectsEnabled="false"
-        app:tint="#F85F6A"
-        app:layout_constraintEnd_toStartOf="@+id/textViewConnectedDeviceChoice"
-        app:layout_constraintHorizontal_bias="0.426"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
+            android:layout_height="45dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toTopOf="@+id/editTextAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
 
-            <EditText
-                android:id="@+id/editTextPassword"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:inputType="textPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
-
-            <Button
-                android:id="@+id/buttonCreateAccount"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="start"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:background="#F85F6A"
-                android:enabled="true"
-                android:textColor="@color/design_default_color_background"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerCountry" />
+        <Button
+            android:id="@+id/buttonCreateAccount"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="#F85F6A"
+            android:enabled="true"
+            android:textColor="@color/design_default_color_background"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerCountry" />
 
 
-            <TextView
-                android:id="@+id/textViewTitleCreateNewAccount"
-                android:layout_width="409dp"
-                android:layout_height="46dp"
-                android:layout_marginTop="16dp"
-                android:textAlignment="center"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textViewTitleCreateNewAccount"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/editTextLastName"
-                android:layout_width="220dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="271dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewTitleCreateNewAccount" />
+        <EditText
+            android:id="@+id/editTextLastName"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/editTextFirstName"
+            app:layout_constraintEnd_toStartOf="@+id/spinnerSex"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitleCreateNewAccount" />
 
-            <EditText
-                android:id="@+id/editTextEmail"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextAge" />
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextAge" />
 
-            <EditText
-                android:id="@+id/editTextAddress"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:inputType="textPostalAddress"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        <EditText
+            android:id="@+id/editTextAddress"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:inputType="textPostalAddress"
+            app:layout_constraintBottom_toTopOf="@+id/editTextCity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
-            <EditText
-                android:id="@+id/editTextCity"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextAddress" />
+        <EditText
+            android:id="@+id/editTextCity"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/spinnerCountry"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextAddress" />
 
-    <Spinner
-        android:id="@+id/spinnerSex"
-        android:layout_width="100dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:background="@xml/spinner"
-        android:popupBackground="@color/colorPrimary"
-        android:dropDownWidth="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/editTextLastName"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitleCreateNewAccount" />
+        <Spinner
+            android:id="@+id/spinnerSex"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="10dp"
+            android:background="@xml/spinner"
+            android:dropDownWidth="wrap_content"
+            android:popupBackground="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/editTextFirstName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.251"
+            app:layout_constraintStart_toEndOf="@+id/editTextLastName"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitleCreateNewAccount" />
 
-    <Spinner
-        android:id="@+id/spinnerCountry"
-        android:spinnerMode="dropdown"
-        android:prompt="@string/connexion"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="8dp"
-        android:background="@xml/spinner"
-        android:popupBackground="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCity" />
+        <Spinner
+            android:id="@+id/spinnerCountry"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="24dp"
+            android:background="@xml/spinner"
+            android:popupBackground="@color/colorPrimary"
+            android:prompt="@string/connexion"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCreateAccount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextCity" />
 
-            <EditText
-                android:id="@+id/editTextFirstName"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/edit_text_border"
-                android:textAlignment="viewStart"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextLastName" />
+        <EditText
+            android:id="@+id/editTextFirstName"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/edit_text_border"
+            android:textAlignment="viewStart"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/editTextAge"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextLastName" />
 
-            <EditText
-                android:id="@+id/editTextAge"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/edit_text_border"
-                android:digits="0123456789"
-                android:inputType="number"
-                android:textAlignment="viewStart"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextFirstName" />
+        <EditText
+            android:id="@+id/editTextAge"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edit_text_border"
+            android:digits="0123456789"
+            android:inputType="number"
+            android:textAlignment="viewStart"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextFirstName" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

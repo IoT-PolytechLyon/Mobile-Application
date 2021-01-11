@@ -9,108 +9,104 @@
             type="com.polytech.bmh.viewmodel.AddConnectedDeviceViewModel" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        tools:context=".AddConnectedDeviceFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/imageViewBackArrow"
+            android:layout_width="46dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            android:contentDescription=""
+            android:soundEffectsEnabled="false"
+            app:layout_constraintEnd_toStartOf="@+id/textViewConnectedDeviceChoice"
+            app:layout_constraintHorizontal_bias="0.426"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="?attr/actionModeCloseDrawable"
+            app:tint="#F85F6A" />
+
+        <Button
+            android:id="@+id/buttonCreateNewConnectedDevice"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".AddConnectedDeviceFragment">
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="#F85F6A"
+            android:enabled="true"
+            android:textColor="@color/design_default_color_background"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextObjectRouter"
+            app:layout_constraintVertical_bias="1.0" />
 
-            <ImageView
-                android:id="@+id/imageViewBackArrow"
-                android:layout_width="46dp"
-                android:layout_height="40dp"
-                android:clickable="true"
-                android:contentDescription=""
-                android:soundEffectsEnabled="false"
-                app:layout_constraintEnd_toStartOf="@+id/textViewConnectedDeviceChoice"
-                app:layout_constraintHorizontal_bias="0.426"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="?attr/actionModeCloseDrawable"
-                app:tint="#F85F6A" />
+        <TextView
+            android:id="@+id/textViewAddConnectedDevice"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="24dp"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/editTextObjectName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/buttonCreateNewConnectedDevice"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="start"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="92dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="90dp"
-                android:background="#F85F6A"
-                android:enabled="true"
-                android:textColor="@color/design_default_color_background"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextObjectRouter"
-                app:layout_constraintVertical_bias="1.0" />
+        <EditText
+            android:id="@+id/editTextObjectName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:autofillHints=""
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/editTextObjectDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewAddConnectedDevice" />
 
-            <TextView
-                android:id="@+id/textViewAddConnectedDevice"
-                android:layout_width="409dp"
-                android:layout_height="46dp"
-                android:layout_marginTop="24dp"
-                android:textAlignment="center"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/editTextObjectDescription"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:autofillHints=""
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            app:layout_constraintBottom_toTopOf="@+id/editTextObjectRouter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextObjectName" />
 
-            <EditText
-                android:id="@+id/editTextObjectName"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="68dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewAddConnectedDevice"
-                android:autofillHints="" />
+        <EditText
+            android:id="@+id/editTextObjectRouter"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:autofillHints=""
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCreateNewConnectedDevice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextObjectDescription" />
 
-            <EditText
-                android:id="@+id/editTextObjectDescription"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="60dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:gravity="start|top"
-                android:inputType="textMultiLine"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextObjectName"
-                android:autofillHints="" />
-
-            <EditText
-                android:id="@+id/editTextObjectRouter"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="60dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/edit_text_border"
-                android:ems="10"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextObjectDescription"
-                android:autofillHints="" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
