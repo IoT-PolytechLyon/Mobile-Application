@@ -59,9 +59,10 @@ class SelectColorFragment : Fragment() {
         }
 
         val args = SelectColorFragmentArgs.fromBundle(requireArguments())
-        var connectedDeviceSelected = args.connectedDevice
+        var connectedDeviceSelectedId = args.connectedDeviceId
+        //var connectedDeviceSelected = args.connectedDevice
 
-        viewModel.getConnectedDeviceById(connectedDeviceSelected._id.toString())
+        viewModel.getConnectedDeviceById(connectedDeviceSelectedId)
 
         viewModel.connectedDevice.observe(viewLifecycleOwner, Observer {
             val connectedDevice = it ?: return@Observer
@@ -93,7 +94,7 @@ class SelectColorFragment : Fragment() {
                 blueRgb = Color.blue(color)
 
                 binding.buttonValidateColor.setOnClickListener {
-                    viewModel.updateConnectedDevice(connectedDeviceSelected._id.toString(), redRgb, greenRgb, blueRgb)
+                    viewModel.updateConnectedDevice(connectedDeviceSelectedId, redRgb, greenRgb, blueRgb)
                 }
 
             }

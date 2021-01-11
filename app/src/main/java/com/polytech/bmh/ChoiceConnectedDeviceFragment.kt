@@ -16,7 +16,7 @@ import com.polytech.bmh.databinding.FragmentChoiceConnectedDeviceBinding
 import com.polytech.bmh.viewmodel.ChoiceConnectedDeviceViewModel
 import com.polytech.bmh.viewmodelfactory.ChoiceConnectedDeviceViewModelFactory
 
-class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class ChoiceConnectedDeviceFragment : Fragment() {
 
     private lateinit var binding: FragmentChoiceConnectedDeviceBinding
     private lateinit var viewModel: ChoiceConnectedDeviceViewModel
@@ -47,8 +47,7 @@ class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedList
 
         binding.apply {
             textViewConnectedDeviceChoice.text = getString(R.string.connected_device_choice)
-            textViewConnectedDeviceOurChoice.text = getString(R.string.connected_device_your_choice)
-            buttonValidateConnectedDevice.text = getString(R.string.connected_device_validate_choice)
+            buttonConnectedDeviceChoice.text = getString(R.string.button_to_choose_a_connected_device)
         }
 
         viewModel.getConnectedDevices()
@@ -57,7 +56,7 @@ class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedList
             val result = it ?: return@Observer
         })
 
-        viewModel.connectedDevice.observe(viewLifecycleOwner, Observer {
+        /*viewModel.connectedDevice.observe(viewLifecycleOwner, Observer {
             val result = it ?: return@Observer
 
             viewModel.getListConnectedDevicesUI(result)
@@ -68,13 +67,13 @@ class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedList
                 var arrayAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, listConnectedDeviceUi )
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-                binding.spinnerConnectedDeviceChoice?.adapter = arrayAdapter
-                binding.spinnerConnectedDeviceChoice?.onItemSelectedListener = this
+                //binding.spinnerConnectedDeviceChoice?.adapter = arrayAdapter
+                //binding.spinnerConnectedDeviceChoice?.onItemSelectedListener = this
 
             })
 
 
-        })
+        })*/
         binding.imageBackArrow.setOnClickListener {
             this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.actionChoiceConnectedDeviceFragmentToLoginFragment())
         }
@@ -83,26 +82,16 @@ class ChoiceConnectedDeviceFragment : Fragment(), AdapterView.OnItemSelectedList
             this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.actionChoiceConnectedDeviceFragmentToAddConnectedDeviceFragment())
         }
 
-        binding.buttonValidateConnectedDevice.setOnClickListener {
-            this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.
-            actionChoiceConnectedDeviceFragmentToSelectColorFragment(viewModel.connectedDeviceSelected.value!!))
+        /*binding.buttonValidateConnectedDevice.setOnClickListener {
+           // this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.
+            //actionChoiceConnectedDeviceFragmentToSelectColorFragment(viewModel.connectedDeviceSelected.value!!))
+        }*/
+
+        binding.buttonConnectedDeviceChoice.setOnClickListener {
+            this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.actionChoiceConnectedDeviceFragmentToListFragment())
         }
 
         return binding.root
     }
 
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        var items: String = parent?.getItemAtPosition(position) as String
-        binding.textViewConnectedDeviceSelected.text = items
-        viewModel.connectedDevice.observe(viewLifecycleOwner, Observer {
-            val listConnectedDevice = it ?: return@Observer
-            viewModel.getValue(listConnectedDevice[position])
-        })
-
-
-    }
-
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        Toast.makeText(this.context, "Nothing select", Toast.LENGTH_LONG).show()
-    }
 }
