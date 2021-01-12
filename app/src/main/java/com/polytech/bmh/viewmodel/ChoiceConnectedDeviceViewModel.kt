@@ -18,10 +18,6 @@ class ChoiceConnectedDeviceViewModel(
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    // list of connected devices
-    private val _connectedDevice = MutableLiveData<List<ConnectedDeviceProperties>>()
-    val connectedDevice: LiveData<List<ConnectedDeviceProperties>>
-        get() = _connectedDevice
 
     private val _connectedDevices = MutableLiveData<List<ConnectedDeviceProperties>>()
     val connectedDevices: LiveData<List<ConnectedDeviceProperties>>
@@ -85,16 +81,16 @@ class ChoiceConnectedDeviceViewModel(
                 println(databaseContent[0])
                 println(apiContent[0])
                 println(result[0])
-                _connectedDevice.value = result
+                _connectedDevices.value = result
             } catch (e: Exception) {
                 println(e)
                 try {
-                    _connectedDevice.value = getConnectedDevicesFromDatabase()
+                    _connectedDevices.value = getConnectedDevicesFromDatabase()
                 }
                 catch(e2: Exception)
                 {
                     println(e2)
-                    _connectedDevice.value = null;
+                    _connectedDevices.value = null;
                 }
 
             }

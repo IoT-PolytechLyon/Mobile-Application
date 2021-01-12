@@ -20,15 +20,15 @@
 
             <TextView
                 android:id="@+id/textViewConnectedDeviceChoice"
-                android:layout_width="409dp"
-                android:layout_height="46dp"
+                android:layout_width="410dp"
+                android:layout_height="38dp"
                 android:textAlignment="center"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonAddConnectedDevice" />
+                app:layout_constraintTop_toBottomOf="@+id/imageBackArrow" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/buttonAddConnectedDevice"
@@ -38,6 +38,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:clickable="true"
+                app:backgroundTint="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -46,16 +47,13 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewList"
-                android:layout_width="411dp"
-                android:layout_height="596dp"
+                android:layout_width="410dp"
+                android:layout_height="612dp"
                 android:layout_marginTop="32dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewConnectedDeviceChoice"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewConnectedDeviceChoice" />
 
             <ImageView
                 android:id="@+id/imageBackArrow"
@@ -68,6 +66,22 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="?attr/actionModeCloseDrawable"
                 tools:layout_editor_absoluteX="0dp" />
+
+            <RelativeLayout
+                android:id="@+id/loadingPanel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true" />
+            </RelativeLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
     </layout>

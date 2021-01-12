@@ -47,6 +47,8 @@ class LoginFragment : Fragment() {
             buttonNewAccount.text = getString(R.string.creation_account)
         }
 
+        binding.loadingPanel.visibility = View.GONE
+
         viewModel.signInResponse.observe(viewLifecycleOwner, Observer {
             val loginResult = it ?: return@Observer
 
@@ -91,13 +93,13 @@ class LoginFragment : Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
             }
-
-
         })
 
 
         // when clicking on the login button
         binding.buttonConnexion.setOnClickListener {
+            binding.loadingPanel.visibility = View.VISIBLE
+
             val email = binding.editTextEmail.text.toString()
             val password = binding.editTextPassword.text.toString()
 
@@ -107,6 +109,8 @@ class LoginFragment : Fragment() {
             if (viewModel.signInFormState.value!!.isDataValid) {
                 viewModel.signIn(email, password)
             }
+
+            binding.loadingPanel.visibility = View.GONE
 
 
         }

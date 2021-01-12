@@ -61,6 +61,7 @@ class ChoiceConnectedDeviceFragment : Fragment() {
         viewModel.connectedDevices.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
+                binding.loadingPanel.visibility = View.GONE
             }
         })
 
