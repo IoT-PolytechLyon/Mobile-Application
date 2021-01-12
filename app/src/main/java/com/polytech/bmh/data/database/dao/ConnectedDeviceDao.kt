@@ -15,5 +15,5 @@ interface ConnectedDeviceDao {
     fun getConnectedDevices() : List<ConnectedDeviceProperties>
 
     @Delete
-    fun delete(connectedDevice: ConnectedDeviceProperties) : Long
+    fun delete(connectedDevice: ConnectedDeviceProperties)
 }
