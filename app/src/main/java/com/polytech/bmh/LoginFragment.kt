@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 
 import com.polytech.bmh.databinding.FragmentLoginBinding
+import com.polytech.bmh.utils.Utils
 import com.polytech.bmh.viewmodel.LoginViewModel
 import com.polytech.bmh.viewmodelfactory.LoginViewModelFactory
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -135,7 +136,7 @@ class LoginFragment : Fragment() {
             Toast.LENGTH_LONG
         ).show()
 
-        hideKeyboard(activity as MainActivity)
+        Utils.hideKeyboard(activity as MainActivity)
 
         this.findNavController()
             .navigate(LoginFragmentDirections.actionLoginFragmentToChoiceConnectedDeviceFragment())
@@ -152,20 +153,4 @@ class LoginFragment : Fragment() {
             Toast.LENGTH_LONG
         ).show()
     }
-
-    /**
-     * Function that reduces phone's keyboard
-     */
-    private fun hideKeyboard(activity: Activity) {
-        val inputMethodManager =
-            activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-
-        val currentFocusedView = activity.currentFocus
-        currentFocusedView?.let {
-            inputMethodManager.hideSoftInputFromWindow(
-                currentFocusedView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS
-            )
-        }
-    }
-
 }

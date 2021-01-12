@@ -10,6 +10,8 @@ import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceProperties
 import com.polytech.bmh.repository.ChoiceConnectedDeviceRepository
 import kotlinx.coroutines.*
 import java.lang.Exception
+import java.util.stream.Collector
+import java.util.stream.Collectors
 
 class ChoiceConnectedDeviceViewModel(
     private val choiceConnectedDeviceRepository: ChoiceConnectedDeviceRepository,
@@ -68,11 +70,14 @@ class ChoiceConnectedDeviceViewModel(
                     }
                 }
 
-                for(connectedDevice in databaseContent) // deletes devices that are not in the api response.
+                val apiIds:List<String> = getIds(apiContent)
+                val databaseIds:List<String> = getIds(databaseContent)
+                for(databaseConnectedDeviceId in databaseIds) // deletes devices that are not in the api response.
                 {
-                    if(!apiContent.contains(connectedDevice))
+                    if(!apiIds.contains(databaseConnectedDeviceId))
                     {
-                        delete(connectedDevice)
+                        val deviceToDelete:ConnectedDeviceProperties = getById(databaseContent, databaseConnectedDeviceId)
+                        delete(deviceToDelete)
                     }
                 }
 
@@ -96,6 +101,28 @@ class ChoiceConnectedDeviceViewModel(
             }
 
         }
+    }
+
+    private fun getIds(connectedDevicesTempList:List<ConnectedDeviceProperties>) : List<String>
+    {
+        val result:MutableList<String> = mutableListOf()
+        for(device in connectedDevicesTempList)
+        {
+            result.add(device._id.toString())
+        }
+        return result
+    }
+
+    private fun getById(connectedDevicesTempList: List<ConnectedDeviceProperties>, id: String) : ConnectedDeviceProperties
+    {
+        for(device in connectedDevicesTempList)
+        {
+            if(device._id.toString().equals(id))
+            {
+                return device
+            }
+        }
+        throw Exception("could not find device in local db")
     }
 
     /**

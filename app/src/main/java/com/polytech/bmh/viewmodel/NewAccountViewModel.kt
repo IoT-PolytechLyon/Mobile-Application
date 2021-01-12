@@ -140,7 +140,7 @@ class NewAccountViewModel(private val newAccountRepository: NewAccountRepository
      * List of countries for our spinner
      */
     fun listOfCountries() : List<String> {
-        return arrayOf("France", "Belgique", "Angleterre", "Allemagne", "États-Unis", "Espagne", "Portugal").toList()
+        return arrayOf("France", "Belgique", "Angleterre", "Allemagne", "États-Unis", "Espagne", "Portugal", "Azerbaïdjan").toList()
     }
 
 }
