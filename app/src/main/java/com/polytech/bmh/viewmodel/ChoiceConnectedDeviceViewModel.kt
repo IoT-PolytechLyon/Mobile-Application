@@ -42,6 +42,7 @@ class ChoiceConnectedDeviceViewModel(
                 val databaseContent = getConnectedDevicesFromDatabase()
                 val apiContent = choiceConnectedDeviceRepository.getConnectedDevice()
 
+
                 for(connectedDevice in apiContent) // fills database content if different
                 {
                     var doNotAdd = false
@@ -57,6 +58,16 @@ class ChoiceConnectedDeviceViewModel(
                         insert(connectedDevice)
                     }
                 }
+
+                for(connectedDevice in databaseContent) // deletes devices that are not in the api response.
+                {
+                    if(!apiContent.contains(connectedDevice))
+                    {
+                        delete(connectedDevice)
+                    }
+                }
+
+
                 val result = getConnectedDevicesFromDatabase()
                 println(databaseContent[0])
                 println(apiContent[0])
@@ -64,7 +75,15 @@ class ChoiceConnectedDeviceViewModel(
                 _connectedDevice.value = result
             } catch (e: Exception) {
                 println(e)
-                _connectedDevice.value = null
+                try {
+                    _connectedDevice.value = getConnectedDevicesFromDatabase()
+                }
+                catch(e2: Exception)
+                {
+                    println(e2)
+                    _connectedDevice.value = null;
+                }
+
             }
 
         }
@@ -77,6 +96,14 @@ class ChoiceConnectedDeviceViewModel(
             val devices = dataSource.getConnectedDevices()
 
             devices
+        }
+    }
+
+    private suspend fun delete(device: ConnectedDeviceProperties)
+    {
+        withContext(Dispatchers.IO)
+        {
+            dataSource.delete(device)
         }
     }
 
