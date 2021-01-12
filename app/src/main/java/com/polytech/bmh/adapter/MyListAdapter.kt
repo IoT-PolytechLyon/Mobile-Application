@@ -1,17 +1,12 @@
 package com.polytech.bmh.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.polytech.bmh.data.model.ConnectedDeviceProperties
+import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceProperties
 import com.polytech.bmh.databinding.ItemViewBinding
-import com.polytech.bmh.listener.MyItemClickListener
-import com.polytech.bmh.listener.MyItemLongClickListener
 
 class MyListAdapter(val clickListener: ConnectedDeviceListener) : ListAdapter<ConnectedDeviceProperties, MyListAdapter.ViewHolder>(UserDiffCallback()) {
 

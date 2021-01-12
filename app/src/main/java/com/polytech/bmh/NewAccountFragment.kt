@@ -121,7 +121,7 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 ).show()
             }
         })
-        viewModel.signUpResult.observe(viewLifecycleOwner, Observer {
+        viewModel.signUpResponse.observe(viewLifecycleOwner, Observer {
             val result = it ?: return@Observer
 
             if (result is Result.Success) {
@@ -188,7 +188,6 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
             Toast.LENGTH_LONG
         ).show()
 
-        //this.findNavController().navigate(NewAccountFragmentDirections.actionNewAccountFragmentSelf())
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

@@ -2,7 +2,7 @@ package com.polytech.bmh.repository
 
 import com.google.gson.JsonParser
 import com.polytech.bmh.data.Result
-import com.polytech.bmh.data.model.ConnectedDeviceAddBody
+import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceAddBody
 import com.polytech.bmh.service.AddConnectedDevice
 import com.polytech.bmh.service.RetrofitInstance
 import retrofit2.await
@@ -21,12 +21,13 @@ class AddConnectedDeviceRepository {
 
             val resultAsJsonObject = JsonParser().parse(result.string())
 
+            // if there are no errors
             if (resultAsJsonObject.asJsonObject["message"].isJsonPrimitive) {
-                // type primitif. On n'a pas d'erreur.
-                val successMessage = resultAsJsonObject.asJsonObject["message"].asString
+                // primitive type. There as no errors.
                 return Result.Success(ConnectedDeviceAddBody(name, description, router))
+            // if there is an error
             } else {
-                // on va chercher l'erreur dans message.message
+                // we will look for the error in message.message
                 val errorMessage = resultAsJsonObject.asJsonObject["message"].asJsonObject["message"].asString
                 return Result.Error(Exception("$errorMessage"))
             }

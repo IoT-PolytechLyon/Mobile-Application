@@ -14,10 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 
-
 import com.polytech.bmh.databinding.FragmentLoginBinding
-import com.polytech.bmh.data.model.user.signin.LoggedInUserView
-//import com.polytech.bmh.ui.login.LoginFragmentDirections
 import com.polytech.bmh.viewmodel.LoginViewModel
 import com.polytech.bmh.viewmodelfactory.LoginViewModelFactory
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -30,7 +27,8 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?) : View? {
+        savedInstanceState: Bundle?
+    ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
 
@@ -49,24 +47,31 @@ class LoginFragment : Fragment() {
             buttonNewAccount.text = getString(R.string.creation_account)
         }
 
-        viewModel.loginResponseBody.observe(viewLifecycleOwner, Observer {
+        viewModel.signInResponse.observe(viewLifecycleOwner, Observer {
+            val loginResult = it ?: return@Observer
 
-            val loginRes = it ?: return@Observer
-
-            if (loginRes.error != null) {
-                loginFailed(loginRes.error)
+            // if there is an error during authentication
+            if (loginResult.error != null) {
+                loginFailed(loginResult.error)
             }
-            if (loginRes.success != null) {
-                updateUI(loginRes.success)
+            // if there are no errors during authentication
+            else if (loginResult.success != null) {
+                loginSuccess(loginResult.success)
+            // if there is an unexpected error
+            } else {
+                Toast.makeText(
+                    this.context,
+                    "Erreur innatendue !",
+                    Toast.LENGTH_LONG
+                ).show()
             }
-           // setResult(Activity.RESULT_OK)
 
-            //finish()
         })
 
-        viewModel.signInFormBodyState.observe(viewLifecycleOwner, Observer {
+        viewModel.signInFormState.observe(viewLifecycleOwner, Observer {
             val userValidate = it ?: return@Observer
 
+            // if the email does not respect the format
             if (userValidate.emailError != null) {
                 binding.editTextEmail.error = userValidate.emailError
                 binding.editTextEmail.requestFocus()
@@ -76,6 +81,7 @@ class LoginFragment : Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
             }
+            // if the password does not respect the format
             if (userValidate.passwordError != null) {
                 binding.editTextPassword.error = userValidate.passwordError
                 binding.editTextPassword.requestFocus()
@@ -90,27 +96,50 @@ class LoginFragment : Fragment() {
         })
 
 
-                binding.buttonConnexion.setOnClickListener {
-                    val email = binding.editTextEmail.text.toString()
-                    val password = binding.editTextPassword.text.toString()
+        // when clicking on the login button
+        binding.buttonConnexion.setOnClickListener {
+            val email = binding.editTextEmail.text.toString()
+            val password = binding.editTextPassword.text.toString()
 
-                    viewModel.signInFormValidate(email, password)
+            viewModel.signInFormValidate(email, password)
 
-                    if (viewModel.signInFormBodyState.value!!.isDataValid) {
-                        viewModel.signIn(email, password)
-                    }
+            // if all the data respect the formats
+            if (viewModel.signInFormState.value!!.isDataValid) {
+                viewModel.signIn(email, password)
+            }
 
 
-                }
+        }
 
-                binding.buttonNewAccount.setOnClickListener {
-                    this.findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToNewAccountFragment())
-                }
+        // when clicking on the sign up button
+        binding.buttonNewAccount.setOnClickListener {
+            this.findNavController()
+                .navigate(LoginFragmentDirections.actionLoginFragmentToNewAccountFragment())
+        }
 
         return binding.root
 
     }
 
+    /**
+     * When the user is well authenticated
+     */
+    private fun loginSuccess(success: String) {
+        Toast.makeText(
+            this.context,
+            "$success",
+            Toast.LENGTH_LONG
+        ).show()
+
+        hideKeyboard(activity as MainActivity)
+
+        this.findNavController()
+            .navigate(LoginFragmentDirections.actionLoginFragmentToChoiceConnectedDeviceFragment())
+    }
+
+    /**
+     * If there is an error during authentication
+     */
     private fun loginFailed(error: String) {
         val errorName = error.toString()
         Toast.makeText(
@@ -118,24 +147,11 @@ class LoginFragment : Fragment() {
             "$errorName",
             Toast.LENGTH_LONG
         ).show()
-
-        this.findNavController().navigate(LoginFragmentDirections.actionLoginFragmentSelf())
     }
 
-    private fun updateUI(model: LoggedInUserView) {
-        val displayName = model.displayName
-        Toast.makeText(
-            this.context,
-            "Bienvenue  $displayName !",
-            Toast.LENGTH_LONG
-        ).show()
-
-
-        hideKeyboard(activity as MainActivity)
-
-        this.findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToChoiceConnectedDeviceFragment())
-    }
-
+    /**
+     * Function that reduces phone's keyboard
+     */
     private fun hideKeyboard(activity: Activity) {
         val inputMethodManager =
             activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -143,7 +159,8 @@ class LoginFragment : Fragment() {
         val currentFocusedView = activity.currentFocus
         currentFocusedView?.let {
             inputMethodManager.hideSoftInputFromWindow(
-                currentFocusedView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+                currentFocusedView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS
+            )
         }
     }
 

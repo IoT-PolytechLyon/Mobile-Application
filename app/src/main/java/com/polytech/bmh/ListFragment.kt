@@ -56,12 +56,12 @@ class ListFragment : Fragment() {
         })
 
         binding.imageBackArrow.setOnClickListener {
-            this.findNavController().navigate(R.id.action_listFragment_to_choiceConnectedDeviceFragment)
+            //this.findNavController().navigate(R.id.action_listFragment_to_choiceConnectedDeviceFragment)
         }
 
         viewModel.connectedDeviceDetail.observe(viewLifecycleOwner, Observer {
             connectedDevice -> connectedDevice?.let {
-                this.findNavController().navigate(ListFragmentDirections.actionListFragmentToSelectColorFragment(connectedDevice))
+              //  this.findNavController().navigate(ListFragmentDirections.actionListFragmentToSelectColorFragment(connectedDevice))
         }
         })
 

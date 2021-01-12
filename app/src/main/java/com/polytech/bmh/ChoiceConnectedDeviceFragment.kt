@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.polytech.bmh.adapter.ConnectedDeviceListener
+import com.polytech.bmh.adapter.MyListAdapter
 import com.polytech.bmh.data.database.Database
 import com.polytech.bmh.data.database.dao.ConnectedDeviceDao
 import com.polytech.bmh.databinding.FragmentChoiceConnectedDeviceBinding
@@ -36,7 +38,7 @@ class ChoiceConnectedDeviceFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         dataSource = Database.getInstance(application).connectedDevicesDao
-        val viewModelFactory = ChoiceConnectedDeviceViewModelFactory(dataSource)
+        val viewModelFactory = ChoiceConnectedDeviceViewModelFactory(dataSource, application)
         viewModel = ViewModelProvider(
             this,
             viewModelFactory
@@ -47,49 +49,39 @@ class ChoiceConnectedDeviceFragment : Fragment() {
 
         binding.apply {
             textViewConnectedDeviceChoice.text = getString(R.string.connected_device_choice)
-            buttonConnectedDeviceChoice.text = getString(R.string.button_to_choose_a_connected_device)
         }
+
+        // Recycler view
+        val adapter = MyListAdapter(ConnectedDeviceListener {
+                connectedDeviceId ->
+            viewModel.onConnectedDeviceClicked(connectedDeviceId)
+        })
+        binding.recyclerViewList.adapter = adapter
+
+        viewModel.connectedDevices.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
 
         viewModel.getConnectedDevices()
 
-        viewModel.response.observe(viewLifecycleOwner, Observer {
-            val result = it ?: return@Observer
-        })
-
-        /*viewModel.connectedDevice.observe(viewLifecycleOwner, Observer {
-            val result = it ?: return@Observer
-
-            viewModel.getListConnectedDevicesUI(result)
-
-            viewModel.connectedDeviceListUi.observe(viewLifecycleOwner, Observer {
-                val listConnectedDeviceUi = it ?: return@Observer
-
-                var arrayAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, listConnectedDeviceUi )
-                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-                //binding.spinnerConnectedDeviceChoice?.adapter = arrayAdapter
-                //binding.spinnerConnectedDeviceChoice?.onItemSelectedListener = this
-
-            })
-
-
-        })*/
+        // when clicking on the back arrow
         binding.imageBackArrow.setOnClickListener {
             this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.actionChoiceConnectedDeviceFragmentToLoginFragment())
         }
 
+        // when clicking on the adding connected device button
         binding.buttonAddConnectedDevice.setOnClickListener {
             this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.actionChoiceConnectedDeviceFragmentToAddConnectedDeviceFragment())
         }
 
-        /*binding.buttonValidateConnectedDevice.setOnClickListener {
-           // this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.
-            //actionChoiceConnectedDeviceFragmentToSelectColorFragment(viewModel.connectedDeviceSelected.value!!))
-        }*/
-
-        binding.buttonConnectedDeviceChoice.setOnClickListener {
-            this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.actionChoiceConnectedDeviceFragmentToListFragment())
+        // when clicking on a specific connected device
+        viewModel.connectedDeviceSelectedId.observe(viewLifecycleOwner, Observer {
+                connectedDevice -> connectedDevice?.let {
+            this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.actionChoiceConnectedDeviceFragmentToSelectColorFragment(connectedDevice))
         }
+        })
 
         return binding.root
     }

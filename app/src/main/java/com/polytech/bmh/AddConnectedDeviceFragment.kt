@@ -54,39 +54,43 @@ class AddConnectedDeviceFragment : Fragment() {
         val connectedDeviceDescription = binding.editTextObjectDescription
         val connectedDeviceRouter = binding.editTextObjectRouter
 
-
-
+        // when clicking on the back arrow
         binding.imageViewBackArrow.setOnClickListener {
-            this.findNavController().navigate(R.id.action_addConnectedDeviceFragment_to_choiceConnectedDeviceFragment)
+            this.findNavController().navigate(AddConnectedDeviceFragmentDirections.actionAddConnectedDeviceFragmentToChoiceConnectedDeviceFragment())
         }
 
-
+        // when clicking create a new account button
         binding.buttonCreateNewConnectedDevice.setOnClickListener {
 
             val connectedDeviceNameValue = connectedDeviceName.text.toString()
             val connectedDeviceDescriptionValue = connectedDeviceDescription.text.toString()
             val connectedDeviceRouterValue = connectedDeviceRouter.text.toString()
 
-            viewModel.addConnectedDeviceFormChanged(connectedDeviceNameValue, connectedDeviceDescriptionValue, connectedDeviceRouterValue)
+            // checks if a field is not valid
+            viewModel.addConnectedDeviceFormValidate(connectedDeviceNameValue, connectedDeviceDescriptionValue, connectedDeviceRouterValue)
 
+            //adds the new connected object if all fields are valid
             viewModel.addConnectedDevice(connectedDeviceNameValue, connectedDeviceDescriptionValue, connectedDeviceRouterValue)
+
+            //this.findNavController().navigate(AddConnectedDeviceFragmentDirections.actionAddConnectedDeviceFragmentToChoiceConnectedDeviceFragment())
 
         }
 
-        viewModel.response.observe(viewLifecycleOwner, Observer {
-            val response = it ?: return@Observer
+        viewModel.addNewConnectedDeviceResponse.observe(viewLifecycleOwner, Observer {
+            val addNewConnectedDeviceResponse = it ?: return@Observer
 
-            if(response.success != null) {
-                updateUI(response.success)
+            if(addNewConnectedDeviceResponse.success != null) {
+                addConnectedDeviceSuccess(addNewConnectedDeviceResponse.success)
             }
-            if(response.error != null) {
-                addConnectedDeviceFailed(response.error)
+            if(addNewConnectedDeviceResponse.error != null) {
+                addConnectedDeviceFailed(addNewConnectedDeviceResponse.error)
             }
         })
 
         viewModel.addConnectedDeviceBodyState.observe(viewLifecycleOwner, Observer {
             val connectedDeviceValidate = it ?: return@Observer
 
+            // if the connected device name does not respect the format
             if(connectedDeviceValidate.nameError != null) {
                 binding.editTextObjectName.error = connectedDeviceValidate.nameError
                 binding.editTextObjectName.requestFocus()
@@ -96,6 +100,8 @@ class AddConnectedDeviceFragment : Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
             }
+
+            // if the connected device description does not respect the format
             if(connectedDeviceValidate.descriptionError != null) {
                 binding.editTextObjectDescription.error = connectedDeviceValidate.descriptionError
                 binding.editTextObjectDescription.requestFocus()
@@ -105,6 +111,8 @@ class AddConnectedDeviceFragment : Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
             }
+
+            // if the connected device router does not respect the format
             if(connectedDeviceValidate.routerError != null) {
                 binding.editTextObjectRouter.error = connectedDeviceValidate.routerError
                 binding.editTextObjectRouter.requestFocus()
@@ -117,27 +125,32 @@ class AddConnectedDeviceFragment : Fragment() {
         })
 
 
-
-
         return binding.root
     }
 
-    private fun updateUI(success: String) {
+    /**
+     * If adding a connected object has worked
+     */
+    private fun addConnectedDeviceSuccess(success: String) {
         Toast.makeText(
             this.context,
             "$success",
             Toast.LENGTH_LONG
         ).show()
+
+        this.findNavController().navigate(AddConnectedDeviceFragmentDirections.actionAddConnectedDeviceFragmentToChoiceConnectedDeviceFragment())
     }
 
+    /**
+     * If adding a connected object has failed
+     */
     private fun addConnectedDeviceFailed(error: String) {
-        val errorName = error.toString()
-        Toast.makeText(
+        /*Toast.makeText(
             this.context,
-            "$errorName",
+            "$error",
             Toast.LENGTH_LONG
-        ).show()
+        ).show()*/
 
-        this.findNavController().navigate(R.id.action_loginFragment_self)
+//        this.findNavController().navigate(R.id.action_loginFragment_self)
     }
 }

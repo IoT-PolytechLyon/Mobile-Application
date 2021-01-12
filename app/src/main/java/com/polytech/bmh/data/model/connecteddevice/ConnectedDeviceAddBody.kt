@@ -1,4 +1,4 @@
-package com.polytech.bmh.data.model
+package com.polytech.bmh.data.model.connecteddevice
 
 data class ConnectedDeviceAddBody(
     val name: String,

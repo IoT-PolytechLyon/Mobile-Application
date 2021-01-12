@@ -1,4 +1,4 @@
-package com.polytech.bmh
+package com.polytech.bmh.utils
 
 import android.app.Activity
 import android.content.Context
@@ -6,7 +6,7 @@ import android.view.inputmethod.InputMethodManager
 
 class Utils {
 
-    fun hideKeyboard(activity: Activity) {
+    public fun hideKeyboard(activity: Activity) {
         val inputMethodManager =
             activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 

@@ -1,4 +1,4 @@
-package com.polytech.bmh.data.model
+package com.polytech.bmh.data.model.user.signin
 
 data class SignInBody(
     val email: String,

@@ -18,14 +18,18 @@ class NewAccountViewModel(private val newAccountRepository: NewAccountRepository
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val _signUpResult = MutableLiveData<Result<SignUpBody>>()
-    val signUpResult: LiveData<Result<SignUpBody>>
-        get() = _signUpResult
-
     private val _signUpFormState = MutableLiveData<SignUpBodyState>()
     val signUpFormState: LiveData<SignUpBodyState>
         get() = _signUpFormState
 
+    // sign in response
+    private val _signUpResponse = MutableLiveData<Result<SignUpBody>>()
+    val signUpResponse: LiveData<Result<SignUpBody>>
+        get() = _signUpResponse
+
+    /**
+     * Sign up function
+     */
     fun signUp(lastName: String, firstName: String, sex: String, age: String, email: String, password: String, address: String, city: String, country: String) {
 
         var sexBoolean = false
@@ -36,16 +40,19 @@ class NewAccountViewModel(private val newAccountRepository: NewAccountRepository
         var ageInt = age.toInt()
 
         uiScope.launch {
-            val result = newAccountRepository.signUp(lastName, firstName, sexBoolean, ageInt, email, password, address, city, country)
+            val resultSignUp = newAccountRepository.signUp(lastName, firstName, sexBoolean, ageInt, email, password, address, city, country)
 
-            if (result is Result.Success) {
-                _signUpResult.value = result
+            if (resultSignUp is Result.Success) {
+                _signUpResponse.value = resultSignUp
             } else {
-                _signUpResult.value = result
+                _signUpResponse.value = resultSignUp
             }
         }
     }
 
+    /**
+     * Function that indicates if the data are in the right format
+     */
     fun signUpFormValidate(lastName: String, firstName: String, age: String, email: String, password: String, address: String, city: String, country: String) {
 
         var ageInt = 0
@@ -73,41 +80,67 @@ class NewAccountViewModel(private val newAccountRepository: NewAccountRepository
 
     }
 
+    /**
+     * If the last name is in the right format
+     */
     private fun isLastNameValid(lastName: String) : Boolean {
         return lastName.isNotEmpty()
     }
 
+    /**
+     * If the first name is in the right format
+     */
     private fun isFirstNameValid(firstName: String) : Boolean {
         return firstName.isNotEmpty()
     }
 
+    /**
+     * If the age is in the right format
+     */
     private fun isAgeValid(age: Int) : Boolean {
         return age in 1..150
     }
 
+    /**
+     * If the email is in the right format
+     */
     private fun isEmailValid(email: String) : Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
+    /**
+     * If the password is in the right format
+     */
     private fun isPasswordValid(password: String) : Boolean {
         return password.length in 6..32
     }
 
+    /**
+     * If the address is in the right format
+     */
     private fun isAddressValid(address: String) : Boolean {
         return address.isNotEmpty()
     }
 
+    /**
+     * If the city is in the right format
+     */
     private fun isCityValid(city: String) : Boolean {
         return city.isNotEmpty()
     }
 
+    /**
+     * List of sexes for our spinner
+     */
     fun listOfSex() : List<String> {
         return arrayOf("Homme", "Femme").toList()
     }
 
+    /**
+     * List of countries for our spinner
+     */
     fun listOfCountries() : List<String> {
         return arrayOf("France", "Belgique", "Angleterre", "Allemagne", "États-Unis", "Espagne", "Portugal").toList()
     }
-
 
 }

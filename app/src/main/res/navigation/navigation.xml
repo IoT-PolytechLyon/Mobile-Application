@@ -30,9 +30,6 @@
         <action
             android:id="@+id/action_choiceConnectedDeviceFragment_to_selectColorFragment"
             app:destination="@id/selectColorFragment" />
-        <action
-            android:id="@+id/action_choiceConnectedDeviceFragment_to_listFragment"
-            app:destination="@id/listFragment" />
     </fragment>
     <fragment
         android:id="@+id/addConnectedDeviceFragment"
@@ -48,7 +45,7 @@
         android:label="SelectColorFragment" >
         <action
             android:id="@+id/action_selectColorFragment_to_choiceConnectedDeviceFragment"
-            app:popUpTo="@id/choiceConnectedDeviceFragment" />
+            app:destination="@id/choiceConnectedDeviceFragment"/>
         <argument
             android:name="connectedDeviceId"
             app:argType="string" />
@@ -63,16 +60,5 @@
         <action
             android:id="@+id/action_newAccountFragment_self"
             app:destination="@id/newAccountFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/listFragment"
-        android:name="com.polytech.bmh.ListFragment"
-        android:label="ListFragment" >
-        <action
-            android:id="@+id/action_listFragment_to_choiceConnectedDeviceFragment"
-            app:destination="@id/choiceConnectedDeviceFragment" />
-        <action
-            android:id="@+id/action_listFragment_to_selectColorFragment"
-            app:destination="@id/selectColorFragment" />
     </fragment>
 </navigation>

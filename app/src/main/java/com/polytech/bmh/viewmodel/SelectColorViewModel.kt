@@ -16,34 +16,50 @@ class SelectColorViewModel(private val selectColorRepository: SelectColorReposit
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val _connectedDevice = MutableLiveData<ConnectedDeviceData>()
-    val connectedDevice: LiveData<ConnectedDeviceData>
-        get() = _connectedDevice
+    // all information about the connected device selected
+    private val _connectedDeviceSelected = MutableLiveData<ConnectedDeviceData>()
+    val connectedDeviceSelected: LiveData<ConnectedDeviceData>
+        get() = _connectedDeviceSelected
 
-    private val _response = MutableLiveData<String>()
-    val response: LiveData<String>
-        get() = _response
+    // response about updating leds color
+    private val _updateLedsColorResponse = MutableLiveData<String>()
+    val updateLedsColorResponse: LiveData<String>
+        get() = _updateLedsColorResponse
 
+
+    /**
+     * Retrieves a specific connected device
+     */
     fun getConnectedDeviceById(id: String) {
         uiScope.launch {
-            val result = selectColorRepository.getConnectedDeviceById(id)
-            _connectedDevice.value = result
+            val connectedDeviceByIdResult = selectColorRepository.getConnectedDeviceById(id)
+
+            if (connectedDeviceByIdResult is Result.Success) {
+                _connectedDeviceSelected.value = (connectedDeviceByIdResult as Result.Success).data
+            } else {
+                _connectedDeviceSelected.value = null
+            }
+
         }
     }
 
+    /**
+     * Updating leds color of a specific connected device
+     */
     fun updateConnectedDevice(id: String, redRgb: Int, greenRgb: Int, blueRgb: Int) {
         uiScope.launch {
             val result = selectColorRepository.updateConnectedDevice(id, redRgb, greenRgb, blueRgb)
 
             if(result is Result.Success) {
-                _response.value = "La couleur des led de l'objet connecté n° $id a bien été mis à jour !"
+                _updateLedsColorResponse.value = "La couleur des leds de l'objet connecté a bien été mise à jour !"
             }
             else {
-                _response.value = "Une erreur s'est produite, la mise à jour n'a pas pu se faire !"
+                _updateLedsColorResponse.value = "Une erreur s'est produite, la mise à jour n'a pas pu se faire !"
             }
 
 
         }
     }
+
 
 }
