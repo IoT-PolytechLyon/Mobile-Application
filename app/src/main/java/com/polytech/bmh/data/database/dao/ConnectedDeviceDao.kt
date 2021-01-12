@@ -13,4 +13,7 @@ interface ConnectedDeviceDao {
 
     @Query("SELECT * from connected_devices")
     fun getConnectedDevices() : List<ConnectedDeviceProperties>
+
+    @Delete
+    fun delete(connectedDevice: ConnectedDeviceProperties) : Long
 }
