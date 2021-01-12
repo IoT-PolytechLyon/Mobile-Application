@@ -1,8 +1,10 @@
 package com.polytech.bmh.service
 
-import com.polytech.bmh.data.model.*
+import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceAddBody
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceData
+import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceProperties
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceUpdateBody
+import com.polytech.bmh.data.model.user.signin.SignInBody
 import com.polytech.bmh.data.model.user.signup.SignUpBody
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

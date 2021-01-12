@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.polytech.bmh.data.database.dao.ConnectedDeviceDao
-import com.polytech.bmh.data.model.ConnectedDeviceProperties
+import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceProperties
 import kotlinx.coroutines.*
 
 class ListViewModel(
@@ -17,10 +17,10 @@ class ListViewModel(
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+
     private val _connectedDevices = MutableLiveData<List<ConnectedDeviceProperties>>()
     val connectedDevices: LiveData<List<ConnectedDeviceProperties>>
         get() = _connectedDevices
-
     private val _connectedDeviceDetail = MutableLiveData<String>()
     val connectedDeviceDetail: LiveData<String>
         get() = _connectedDeviceDetail

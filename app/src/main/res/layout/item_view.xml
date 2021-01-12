@@ -6,7 +6,7 @@
     <data>
         <variable
             name="connectedDevice"
-            type="com.polytech.bmh.data.model.ConnectedDeviceProperties" />
+            type="com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceProperties" />
 
         <variable
             name="clickListener"

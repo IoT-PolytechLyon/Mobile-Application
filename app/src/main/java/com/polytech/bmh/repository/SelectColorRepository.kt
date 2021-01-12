@@ -10,35 +10,54 @@ import com.polytech.bmh.service.RetrofitInstance
 import com.polytech.bmh.service.UpdateConnectedDevice
 import retrofit2.await
 import java.io.IOException
+import java.lang.Exception
 
 class SelectColorRepository {
 
-    suspend fun getConnectedDeviceById(id: String) : ConnectedDeviceData {
+    /**
+     * Retrieves a connected device by id
+     */
+    suspend fun getConnectedDeviceById(id: String): Result<ConnectedDeviceData> {
+        try {
             val service = RetrofitInstance.getRetrofitInstance().create(ConnectedDevicesProperties::class.java)
             val getConnectedDeviceByIdRequest = service.getConnectedDevicesById(id)
-            return getConnectedDeviceByIdRequest.await()
+            val getConnectedDeviceByIdResult = getConnectedDeviceByIdRequest.await()
+            return Result.Success(getConnectedDeviceByIdResult)
+        } catch (e: Throwable) {
+            return Result.Error(Exception("Une erreur est survenue !", e))
+        }
+
     }
 
-    suspend fun updateConnectedDevice(id: String, redRgb: Int, greenRgb: Int, blueRgb: Int) : Result<String> {
+    /**
+     * Retrieves led color to a specific connected device
+     */
+    suspend fun updateConnectedDevice(id: String, redRgb: Int, greenRgb: Int, blueRgb: Int): Result<String> {
         try {
-            val connectedDevice: ConnectedDeviceData = getConnectedDeviceById(id)
+            if (getConnectedDeviceById(id) is Result.Success) {
+                val connectedDevice: ConnectedDeviceData = (getConnectedDeviceById(id) as Result.Success).data
 
-            val connectedDeviceLedState = ConnectedDeviceStateLed(connectedDevice.state.led_state.is_on,
-                redRgb, greenRgb, blueRgb)
+                val connectedDeviceLedState = ConnectedDeviceStateLed(connectedDevice.state.led_state.is_on, redRgb, greenRgb, blueRgb
+                )
 
-            val connectedDeviceState = ConnectedDeviceState(connectedDevice.state.pir_state,
-                connectedDevice.state.nfc_state, connectedDeviceLedState)
+                val connectedDeviceState = ConnectedDeviceState(
+                    connectedDevice.state.pir_state,
+                    connectedDevice.state.nfc_state, connectedDeviceLedState
+                )
 
-            val service = RetrofitInstance.getRetrofitInstance().create(UpdateConnectedDevice::class.java)
-            val updateConnectedDeviceRequest = service.updateConnectedDevice(id, ConnectedDeviceUpdateBody(connectedDeviceState))
-            val result = updateConnectedDeviceRequest.await()
-            return Result.Success("L'objet connecté a été modifié avec succès !")
+                val service = RetrofitInstance.getRetrofitInstance().create(UpdateConnectedDevice::class.java)
+                val updateConnectedDeviceRequest = service.updateConnectedDevice(id, ConnectedDeviceUpdateBody(connectedDeviceState))
+                val result = updateConnectedDeviceRequest.await()
+
+                return Result.Success("L'objet connecté a été modifié avec succès !")
+            } else {
+                return Result.Error(Exception("La mise à jour ne peut pas se faire !"))
+            }
+
         } catch (e: Throwable) {
             return Result.Error(IOException("Erreur lors de la mise à jour !", e))
 
         }
-
-
 
     }
 }

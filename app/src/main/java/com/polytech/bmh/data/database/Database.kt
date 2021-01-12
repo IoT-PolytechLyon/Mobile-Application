@@ -5,7 +5,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.polytech.bmh.data.database.dao.ConnectedDeviceDao
 
-import com.polytech.bmh.data.model.ConnectedDeviceProperties
+import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceProperties
 
 @Database(entities = [ConnectedDeviceProperties::class], version = 3, exportSchema = false)
 abstract class Database : RoomDatabase() {
