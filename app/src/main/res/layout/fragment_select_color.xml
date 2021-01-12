@@ -19,76 +19,85 @@
             android:layout_height="33dp"
             android:layout_marginStart="45dp"
             android:layout_marginEnd="45dp"
+            android:layout_marginBottom="8dp"
             android:textAlignment="center"
             android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/colorPicker"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewNameConnectedDevice" />
 
-            <TextView
-                android:id="@+id/textViewNameConnectedDevice"
-                android:layout_width="322dp"
-                android:layout_height="33dp"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="45dp"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewSubtitle" />
+        <TextView
+            android:id="@+id/textViewNameConnectedDevice"
+            android:layout_width="322dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="45dp"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewRouterConnectedDevice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSubtitle" />
 
-            <TextView
-                android:id="@+id/textViewSubtitle"
-                android:layout_width="275dp"
-                android:layout_height="52dp"
-                android:layout_marginStart="68dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="68dp"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewChooseColor" />
+        <TextView
+            android:id="@+id/textViewSubtitle"
+            android:layout_width="275dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="68dp"
+            android:layout_marginBottom="1dp"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textViewNameConnectedDevice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewChooseColor" />
 
-            <View
-                android:id="@+id/viewColorSelected"
-                android:layout_width="70dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="150dp"
-                android:layout_marginEnd="150dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewSelectedColor" />
+        <View
+            android:id="@+id/viewColorSelected"
+            android:layout_width="70dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginEnd="150dp"
+            android:layout_marginBottom="93dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSelectedColor" />
 
-            <TextView
-                android:id="@+id/textViewSelectedColor"
-                android:layout_width="266dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="92dp"
-                android:layout_marginEnd="92dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/colorPicker" />
+        <TextView
+            android:id="@+id/textViewSelectedColor"
+            android:layout_width="266dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="92dp"
+            android:layout_marginEnd="92dp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/viewColorSelected"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/colorPicker" />
 
-            <top.defaults.colorpicker.ColorPickerView
-                android:id="@+id/colorPicker"
-                android:layout_width="318dp"
-                android:layout_height="360dp"
-                android:layout_marginStart="62dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="62dp"
-                app:enableAlpha="true"
-                app:enableBrightness="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewRouterConnectedDevice" />
+        <top.defaults.colorpicker.ColorPickerView
+            android:id="@+id/colorPicker"
+            android:layout_width="318dp"
+            android:layout_height="360dp"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="62dp"
+            app:enableAlpha="true"
+            app:enableBrightness="true"
+            app:layout_constraintBottom_toTopOf="@+id/textViewSelectedColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRouterConnectedDevice" />
 
             <ImageView
                 android:id="@+id/imageViewBackArrow"
@@ -103,18 +112,21 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="?attr/actionModeCloseDrawable" />
 
-            <TextView
-                android:id="@+id/textViewChooseColor"
-                android:layout_width="409dp"
-                android:layout_height="46dp"
-                android:layout_marginTop="16dp"
-                android:textAlignment="center"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textViewChooseColor"
+            android:layout_width="409dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="4dp"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textViewSubtitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
