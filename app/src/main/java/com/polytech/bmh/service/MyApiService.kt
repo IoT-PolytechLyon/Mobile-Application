@@ -8,11 +8,13 @@ import com.polytech.bmh.data.model.user.signin.SignInBody
 import com.polytech.bmh.data.model.user.signup.SignUpBody
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
+import java.util.concurrent.TimeUnit
 
 //private const val BASE_URL = "http://10.0.2.2:8081"
 //private const val BASE_URL = "http://192.168.0.55:8081"
@@ -66,8 +68,15 @@ class RetrofitInstance {
         const val BASE_URL: String = "http://10.0.2.2:8081"
 
         fun getRetrofitInstance(): Retrofit {
+            val client:OkHttpClient = OkHttpClient().newBuilder()
+                .connectTimeout(5, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build()
+
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .client(client)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
         }
