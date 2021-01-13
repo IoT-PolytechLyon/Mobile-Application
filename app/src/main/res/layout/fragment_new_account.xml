@@ -49,7 +49,7 @@
             android:layout_height="50dp"
             android:layout_gravity="start"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:background="#F85F6A"
             android:enabled="true"
@@ -82,9 +82,8 @@
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/edit_text_border"
             android:ems="10"
             android:inputType="textPersonName"
@@ -145,13 +144,12 @@
             android:id="@+id/spinnerSex"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="10dp"
-            android:background="@xml/spinner"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/spinner"
             android:dropDownWidth="wrap_content"
-            android:popupBackground="@color/colorPrimary"
+            android:popupBackground="@color/colorGrey"
             app:layout_constraintBottom_toTopOf="@+id/editTextFirstName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.251"
@@ -163,11 +161,9 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="18dp"
             android:layout_marginEnd="24dp"
-            android:background="@xml/spinner"
-            android:popupBackground="@color/colorPrimary"
-            android:prompt="@string/connexion"
+            android:background="@drawable/spinner"
+            android:popupBackground="@color/colorGrey"
             android:spinnerMode="dropdown"
             app:layout_constraintBottom_toTopOf="@+id/buttonCreateAccount"
             app:layout_constraintEnd_toEndOf="parent"
@@ -209,6 +205,23 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextFirstName" />
+
+        <RelativeLayout
+            android:id="@+id/loadingPanel"
+            android:layout_width="53dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="1dp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true" />
+        </RelativeLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

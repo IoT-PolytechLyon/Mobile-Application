@@ -1,5 +1,6 @@
 package com.polytech.bmh.viewmodel
 
+import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -27,6 +28,10 @@ class NewAccountViewModel(private val newAccountRepository: NewAccountRepository
     val signUpResponse: LiveData<Result<SignUpBody>>
         get() = _signUpResponse
 
+    init {
+        Log.i("NewAccountViewModel", "created")
+    }
+
     /**
      * Sign up function
      */
@@ -37,7 +42,7 @@ class NewAccountViewModel(private val newAccountRepository: NewAccountRepository
             sexBoolean = true
         }
 
-        var ageInt = age.toInt()
+        val ageInt = age.toInt()
 
         uiScope.launch {
             val resultSignUp = newAccountRepository.signUp(lastName, firstName, sexBoolean, ageInt, email, password, address, city, country)
@@ -141,6 +146,12 @@ class NewAccountViewModel(private val newAccountRepository: NewAccountRepository
      */
     fun listOfCountries() : List<String> {
         return arrayOf("France", "Belgique", "Angleterre", "Allemagne", "États-Unis", "Espagne", "Portugal", "Azerbaïdjan").toList()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+        Log.i("NewAccountViewModel", "cleared")
     }
 
 }

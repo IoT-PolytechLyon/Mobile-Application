@@ -39,7 +39,7 @@ class ListViewModel(
     private suspend fun getConnectedDevicesFromDatabase(): List<ConnectedDeviceProperties>? {
         return withContext(Dispatchers.IO) {
 
-            var connectedDevices = database.getConnectedDevices()
+            val connectedDevices = database.getConnectedDevices()
             connectedDevices
         }
     }

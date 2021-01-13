@@ -1,5 +1,6 @@
 package com.polytech.bmh.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,6 +27,9 @@ class SelectColorViewModel(private val selectColorRepository: SelectColorReposit
     val updateLedsColorResponse: LiveData<String>
         get() = _updateLedsColorResponse
 
+    init {
+        Log.i("SelectColorViewColor", "created")
+    }
 
     /**
      * Retrieves a specific connected device
@@ -35,7 +39,7 @@ class SelectColorViewModel(private val selectColorRepository: SelectColorReposit
             val connectedDeviceByIdResult = selectColorRepository.getConnectedDeviceById(id)
 
             if (connectedDeviceByIdResult is Result.Success) {
-                _connectedDeviceSelected.value = (connectedDeviceByIdResult as Result.Success).data
+                _connectedDeviceSelected.value = connectedDeviceByIdResult.data
             } else {
                 _connectedDeviceSelected.value = null
             }
@@ -59,6 +63,12 @@ class SelectColorViewModel(private val selectColorRepository: SelectColorReposit
 
 
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+        Log.i("SelectColorViewColor", "cleared")
     }
 
 

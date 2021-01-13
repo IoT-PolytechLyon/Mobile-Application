@@ -50,7 +50,7 @@ class SelectColorFragment : Fragment() {
 
         // we retrieve the id connected device on which the user has clicked (from the recycler view)
         val args = SelectColorFragmentArgs.fromBundle(requireArguments())
-        var connectedDeviceSelectedId = args.connectedDeviceId
+        val connectedDeviceSelectedId = args.connectedDeviceId
 
         viewModel.getConnectedDeviceById(connectedDeviceSelectedId)
 

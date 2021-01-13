@@ -9,9 +9,6 @@ import com.polytech.bmh.data.database.dao.ConnectedDeviceDao
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceProperties
 import com.polytech.bmh.repository.ChoiceConnectedDeviceRepository
 import kotlinx.coroutines.*
-import java.lang.Exception
-import java.util.stream.Collector
-import java.util.stream.Collectors
 
 class ChoiceConnectedDeviceViewModel(
     private val choiceConnectedDeviceRepository: ChoiceConnectedDeviceRepository,
@@ -20,7 +17,7 @@ class ChoiceConnectedDeviceViewModel(
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-
+    // connected devices list
     private val _connectedDevices = MutableLiveData<List<ConnectedDeviceProperties>>()
     val connectedDevices: LiveData<List<ConnectedDeviceProperties>>
         get() = _connectedDevices
@@ -31,7 +28,7 @@ class ChoiceConnectedDeviceViewModel(
         get() = _connectedDeviceSelectedId
 
     init {
-        Log.i("ListViewModel", "created")
+        Log.i("ChoiceCDViewModel", "created")
         initializeConnectedDevices()
     }
 
@@ -80,22 +77,15 @@ class ChoiceConnectedDeviceViewModel(
                         delete(deviceToDelete)
                     }
                 }
-
-
                 val result = getConnectedDevicesFromDatabase()
-                println(databaseContent[0])
-                println(apiContent[0])
-                println(result[0])
                 _connectedDevices.value = result
             } catch (e: Exception) {
-                println(e)
                 try {
                     _connectedDevices.value = getConnectedDevicesFromDatabase()
                 }
                 catch(e2: Exception)
                 {
-                    println(e2)
-                    _connectedDevices.value = null;
+                    _connectedDevices.value = null
                 }
 
             }
@@ -164,5 +154,7 @@ class ChoiceConnectedDeviceViewModel(
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
+        Log.i("ChoiceCDViewModel", "cleared")
+
     }
 }

@@ -1,5 +1,6 @@
 package com.polytech.bmh
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.polytech.bmh.databinding.FragmentAddConnectedDeviceBinding
 import com.polytech.bmh.service.*
+import com.polytech.bmh.utils.Utils
 import com.polytech.bmh.viewmodel.AddConnectedDeviceViewModel
 import com.polytech.bmh.viewmodelfactory.AddConnectedDeviceViewModelFactory
 
@@ -42,6 +44,8 @@ class AddConnectedDeviceFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        binding.loadingPanel.visibility = View.GONE
+
         binding.apply {
             textViewAddConnectedDevice.text = getString(R.string.add_connected_device)
             editTextObjectName.hint = getString(R.string.connected_device_name)
@@ -57,6 +61,7 @@ class AddConnectedDeviceFragment : Fragment() {
         // when clicking on the back arrow
         binding.imageViewBackArrow.setOnClickListener {
             this.findNavController().navigate(AddConnectedDeviceFragmentDirections.actionAddConnectedDeviceFragmentToChoiceConnectedDeviceFragment())
+            Utils.hideKeyboard(activity as Activity)
         }
 
         // when clicking create a new account button
@@ -65,9 +70,6 @@ class AddConnectedDeviceFragment : Fragment() {
             val connectedDeviceNameValue = connectedDeviceName.text.toString()
             val connectedDeviceDescriptionValue = connectedDeviceDescription.text.toString()
             val connectedDeviceRouterValue = connectedDeviceRouter.text.toString()
-
-            // checks if a field is not valid
-            viewModel.addConnectedDeviceFormValidate(connectedDeviceNameValue, connectedDeviceDescriptionValue, connectedDeviceRouterValue)
 
             //adds the new connected object if all fields are valid
             viewModel.addConnectedDevice(connectedDeviceNameValue, connectedDeviceDescriptionValue, connectedDeviceRouterValue)
@@ -122,6 +124,10 @@ class AddConnectedDeviceFragment : Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
             }
+
+            if (connectedDeviceValidate.isDataValid) {
+                binding.loadingPanel.visibility = View.VISIBLE
+            }
         })
 
 
@@ -132,24 +138,31 @@ class AddConnectedDeviceFragment : Fragment() {
      * If adding a connected object has worked
      */
     private fun addConnectedDeviceSuccess(success: String) {
+
+        binding.loadingPanel.visibility = View.GONE
+
         Toast.makeText(
             this.context,
-            "$success",
+            success,
             Toast.LENGTH_LONG
         ).show()
 
         this.findNavController().navigate(AddConnectedDeviceFragmentDirections.actionAddConnectedDeviceFragmentToChoiceConnectedDeviceFragment())
+        Utils.hideKeyboard(activity as Activity)
     }
 
     /**
      * If adding a connected object has failed
      */
     private fun addConnectedDeviceFailed(error: String) {
-        /*Toast.makeText(
+
+        binding.loadingPanel.visibility = View.GONE
+
+        Toast.makeText(
             this.context,
-            "$error",
+            error,
             Toast.LENGTH_LONG
-        ).show()*/
+        ).show()
 
 //        this.findNavController().navigate(R.id.action_loginFragment_self)
     }

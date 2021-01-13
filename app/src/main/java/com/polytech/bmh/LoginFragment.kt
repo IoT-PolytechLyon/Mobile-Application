@@ -1,12 +1,9 @@
 package com.polytech.bmh
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -94,25 +91,26 @@ class LoginFragment : Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
             }
-        })
 
+            if (userValidate.isDataValid) {
+                binding.loadingPanel.visibility = View.VISIBLE
+            }
+
+
+        })
 
         // when clicking on the login button
         binding.buttonConnexion.setOnClickListener {
-            binding.loadingPanel.visibility = View.VISIBLE
 
             val email = binding.editTextEmail.text.toString()
             val password = binding.editTextPassword.text.toString()
 
             viewModel.signInFormValidate(email, password)
 
-            // if all the data respect the formats
+            // if all the data respect formats
             if (viewModel.signInFormState.value!!.isDataValid) {
                 viewModel.signIn(email, password)
             }
-
-            binding.loadingPanel.visibility = View.GONE
-
 
         }
 
@@ -130,10 +128,13 @@ class LoginFragment : Fragment() {
      * When the user is well authenticated
      */
     private fun loginSuccess(success: String) {
+
+        binding.loadingPanel.visibility = View.GONE
+
         Toast.makeText(
             this.context,
-            "$success",
-            Toast.LENGTH_LONG
+            success,
+            Toast.LENGTH_SHORT
         ).show()
 
         Utils.hideKeyboard(activity as MainActivity)
@@ -146,10 +147,12 @@ class LoginFragment : Fragment() {
      * If there is an error during authentication
      */
     private fun loginFailed(error: String) {
-        val errorName = error.toString()
+
+        binding.loadingPanel.visibility = View.GONE
+
         Toast.makeText(
             this.context,
-            "$errorName",
+            error,
             Toast.LENGTH_LONG
         ).show()
     }

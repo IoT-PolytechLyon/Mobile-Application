@@ -17,7 +17,7 @@ class ChoiceConnectedDeviceRepository {
         try {
             val service = RetrofitInstance.getRetrofitInstance().create(ConnectedDevicesProperties::class.java)
             val connectedDeviceRequest = service.getConnectedDevices()
-            var result = connectedDeviceRequest.await()
+            val result = connectedDeviceRequest.await()
             return Result.Success(result)
         } catch (e: Throwable) {
             return Result.Error(Exception("Un problème réseau est survenu !", e))

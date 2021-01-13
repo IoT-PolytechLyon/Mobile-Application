@@ -1,5 +1,6 @@
 package com.polytech.bmh.viewmodel
 
+import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -27,6 +28,9 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     val signInResponse: LiveData<DataResult>
         get() = _signInResponse
 
+    init {
+        Log.i("LoginViewModel", "created")
+    }
 
     /**
      * Login function
@@ -72,6 +76,12 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
             _signInFormState.value = SignInBodyState(isDataValid = true)
         }
 
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+        Log.i("LoginViewModel", "cleared")
     }
 
 }

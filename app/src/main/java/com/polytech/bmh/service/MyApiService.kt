@@ -63,7 +63,7 @@ interface UpdateConnectedDevice {
 class RetrofitInstance {
     companion object {
         //val BASE_URL: String = "http://192.168.0.55:8081"
-        val BASE_URL: String = "http://10.0.2.2:8081"
+        const val BASE_URL: String = "http://10.0.2.2:8081"
 
         fun getRetrofitInstance(): Retrofit {
             return Retrofit.Builder()

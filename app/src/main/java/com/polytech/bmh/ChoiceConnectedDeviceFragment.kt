@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -61,6 +60,11 @@ class ChoiceConnectedDeviceFragment : Fragment() {
         viewModel.connectedDevices.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
+                if (it.isEmpty()) {
+                    binding.textViewIfEmptyRecyclerView.text = getString(R.string.empty_recycler_view)
+                } else {
+                    binding.textViewIfEmptyRecyclerView.text = getString(R.string.nothing)
+                }
                 binding.loadingPanel.visibility = View.GONE
             }
         })

@@ -1,7 +1,6 @@
 package com.polytech.bmh
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +9,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.polytech.bmh.adapter.ConnectedDeviceListener
 import com.polytech.bmh.adapter.MyListAdapter
 import com.polytech.bmh.data.database.Database
 import com.polytech.bmh.databinding.FragmentListBinding
 import com.polytech.bmh.viewmodel.ListViewModel
 import com.polytech.bmh.viewmodelfactory.ListViewModelFactory
-import kotlinx.android.synthetic.main.fragment_list.*
 
 class ListFragment : Fragment() {
 
@@ -44,7 +41,7 @@ class ListFragment : Fragment() {
 
         val adapter = MyListAdapter(ConnectedDeviceListener {
                 connectedDeviceId ->
-            Toast.makeText(context, "${connectedDeviceId}", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, connectedDeviceId, Toast.LENGTH_LONG).show()
             viewModel.onConnectedDeviceClicked(connectedDeviceId)
         })
         binding.recyclerViewList.adapter = adapter

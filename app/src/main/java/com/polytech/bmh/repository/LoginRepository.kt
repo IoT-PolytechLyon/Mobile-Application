@@ -19,7 +19,7 @@ class LoginRepository {
         try {
             val service = RetrofitInstance.getRetrofitInstance().create(SignInUser::class.java)
             val signInRequest = service.signIn(SignInBody(email, password))
-            var result = signInRequest.await()
+            val result = signInRequest.await()
             val resultAsJsonObject = JsonParser().parse(result.string())
 
             // if the email exists in the database but the password is false

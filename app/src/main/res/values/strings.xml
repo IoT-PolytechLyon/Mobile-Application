@@ -35,6 +35,8 @@
     <string name="connected_device_choice">Choix de l\'objet</string>
     <string name="button_to_choose_a_connected_device">Cliquer sur le bouton pour choisir un objet connecté</string>
     <string name="connected_device_validate_choice">Valider</string>
+    <string name="empty_recycler_view">Il n\'y a pas d\'objet connecté enregistré !</string>
+    <string name="nothing"></string>
 
     <!-- Strings related to choosing leds color -->
     <string name="choose_color">Choisissez la couleur</string>
@@ -42,8 +44,5 @@
     <string name="change_leds_color">Cliquer pour changer la couleur des leds</string>
     <string name="current_color_leds">La couleur actuelle des leds est :</string>
     <string name="validate_leds_color">Valider</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
 </resources>

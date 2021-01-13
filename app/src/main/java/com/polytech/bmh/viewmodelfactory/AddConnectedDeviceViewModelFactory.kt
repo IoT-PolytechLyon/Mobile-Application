@@ -3,9 +3,7 @@ package com.polytech.bmh.viewmodelfactory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.polytech.bmh.repository.AddConnectedDeviceRepository
-import com.polytech.bmh.repository.ChoiceConnectedDeviceRepository
 import com.polytech.bmh.viewmodel.AddConnectedDeviceViewModel
-import com.polytech.bmh.viewmodel.ChoiceConnectedDeviceViewModel
 
 class AddConnectedDeviceViewModelFactory: ViewModelProvider.Factory {
 

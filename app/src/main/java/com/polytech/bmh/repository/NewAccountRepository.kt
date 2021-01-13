@@ -18,7 +18,7 @@ class NewAccountRepository {
         try {
             val service = RetrofitInstance.getRetrofitInstance().create(SignUpUser::class.java)
             val signUpRequest = service.signUp(SignUpBody(lastName, firstName, sex, age, email, password, address, city, country))
-            var result = signUpRequest.await()
+            val result = signUpRequest.await()
             val resultAsJsonObject = JsonParser().parse(result.string())
 
             // if an account with this email already exists

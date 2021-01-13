@@ -1,5 +1,6 @@
 package com.polytech.bmh
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.polytech.bmh.data.Result
 import com.polytech.bmh.data.model.user.signup.SignUpBody
 import com.polytech.bmh.databinding.FragmentNewAccountBinding
+import com.polytech.bmh.utils.Utils
 import com.polytech.bmh.viewmodel.NewAccountViewModel
 import com.polytech.bmh.viewmodelfactory.NewAccountViewModelFactory
 import kotlinx.android.synthetic.main.fragment_new_account.*
@@ -52,11 +54,13 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
             buttonCreateAccount.text = getString(R.string.create_new_account)
         }
 
+        binding.loadingPanel.visibility = View.GONE
 
 
         viewModel.signUpFormState.observe(viewLifecycleOwner, Observer {
             val newUserValidate = it ?: return@Observer
 
+            // if the last name does not respect the format
             if (newUserValidate.lastNameError != null) {
                 binding.editTextLastName.error = newUserValidate.lastNameError
                 binding.editTextLastName.requestFocus()
@@ -66,6 +70,7 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     Toast.LENGTH_LONG
                 ).show()
             }
+            // if the first name does not respect the format
             if (newUserValidate.firstNameError != null) {
                 binding.editTextFirstName.error = newUserValidate.firstNameError
                 binding.editTextFirstName.requestFocus()
@@ -75,6 +80,7 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     Toast.LENGTH_LONG
                 ).show()
             }
+            // if the age does not respect the format
             if (newUserValidate.ageError != null) {
                 binding.editTextAge.error = newUserValidate.ageError
                 binding.editTextAge.requestFocus()
@@ -84,6 +90,7 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     Toast.LENGTH_LONG
                 ).show()
             }
+            // if the email does not respect the format
             if (newUserValidate.emailError != null) {
                 binding.editTextEmail.error = newUserValidate.emailError
                 binding.editTextEmail.requestFocus()
@@ -93,6 +100,7 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     Toast.LENGTH_LONG
                 ).show()
             }
+            // if the password does not respect the format
             if (newUserValidate.passwordError != null) {
                 binding.editTextPassword.error = newUserValidate.passwordError
                 binding.editTextPassword.requestFocus()
@@ -102,6 +110,7 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     Toast.LENGTH_LONG
                 ).show()
             }
+            // if the address does not respect the format
             if (newUserValidate.addressError != null) {
                 binding.editTextAddress.error = newUserValidate.addressError
                 binding.editTextAddress.requestFocus()
@@ -111,6 +120,7 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     Toast.LENGTH_LONG
                 ).show()
             }
+            // if the city does not respect the format
             if (newUserValidate.cityError != null) {
                 binding.editTextCity.error = newUserValidate.cityError
                 binding.editTextCity.requestFocus()
@@ -121,17 +131,22 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 ).show()
             }
         })
+
         viewModel.signUpResponse.observe(viewLifecycleOwner, Observer {
             val result = it ?: return@Observer
 
+            // if there are no errors
             if (result is Result.Success) {
                 signUpSuccess(result)
+
+            // if there is an error
             } else {
                 signUpFailed(result)
             }
 
         })
 
+        // when clicking on the creating account button
         binding.buttonCreateAccount.setOnClickListener {
 
             val lastName = binding.editTextLastName.text.toString()
@@ -146,33 +161,45 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
             viewModel.signUpFormValidate(lastName, firstName, age, email, password, address, city, country)
 
+            // if all the data respect formats
             if (viewModel.signUpFormState.value!!.isDataValid) {
+                binding.loadingPanel.visibility = View.VISIBLE
                 viewModel.signUp(lastName, firstName, sex, age, email, password, address, city, country)
             }
         }
 
-        var arrayFirstAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, viewModel.listOfSex())
+        // Sex spinner
+        val arrayFirstAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, viewModel.listOfSex())
         arrayFirstAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        binding.spinnerSex?.adapter = arrayFirstAdapter
-        binding.spinnerSex?.onItemSelectedListener = this
+        binding.spinnerSex.adapter = arrayFirstAdapter
+        binding.spinnerSex.onItemSelectedListener = this
 
-        var arraySecondAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, viewModel.listOfCountries())
+        // Countries spinner
+        val arraySecondAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, viewModel.listOfCountries())
         arraySecondAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        binding.spinnerCountry?.adapter = arraySecondAdapter
-        binding.spinnerCountry?.onItemSelectedListener = this
+        binding.spinnerCountry.adapter = arraySecondAdapter
+        binding.spinnerCountry.onItemSelectedListener = this
 
         binding.spinnerCountry.setPromptId(R.string.create_new_account)
 
+        // when clicking on the back arrow button
         binding.imageViewBackArrow.setOnClickListener {
             this.findNavController().navigate(NewAccountFragmentDirections.actionNewAccountFragmentToLoginFragment())
+            Utils.hideKeyboard(activity as Activity)
         }
 
         return binding.root
     }
 
+    /**
+     * When there is no error
+     */
     private fun signUpSuccess(result: Result<SignUpBody>) {
+
+        binding.loadingPanel.visibility = View.GONE
+
         Toast.makeText(
             this.context,
             "Le compte ${(result as Result.Success).data.email} a été créé ! Merci de vous connecter !",
@@ -181,7 +208,13 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
         this.findNavController().navigate(NewAccountFragmentDirections.actionNewAccountFragmentToLoginFragment())
     }
 
+    /**
+     * If there is an error during authentication
+     */
     private fun signUpFailed(result: Result<SignUpBody>) {
+
+        binding.loadingPanel.visibility = View.GONE
+
         Toast.makeText(
             this.context,
             (result as Result.Error).exception.message,
