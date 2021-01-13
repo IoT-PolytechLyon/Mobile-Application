@@ -184,13 +184,13 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
             val lastName = binding.editTextLastName.text.toString()
             val firstName = binding.editTextFirstName.text.toString()
-            val sex = binding.spinnerGender.toString()
+            val sex = binding.spinnerGender.selectedItem.toString()
             val age = viewModel.dateOfBirthToAge(calendarDateOfBirth).toString()
             val email = binding.editTextEmail.text.toString()
             val password = binding.editTextPassword.text.toString()
             val address = binding.editTextAddress.text.toString()
             val city = binding.editTextCity.text.toString()
-            val country = binding.spinnerCountry.toString()
+            val country = binding.spinnerCountry.selectedItem.toString()
 
             viewModel.signUpFormValidate(lastName, firstName, age, email, password, address, city, country)
 
