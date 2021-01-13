@@ -11,14 +11,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/textViewRouterConnectedDevice"
-            android:layout_width="322dp"
-            android:layout_height="33dp"
-            android:layout_marginStart="45dp"
-            android:layout_marginEnd="45dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:textAlignment="center"
             android:textSize="18sp"
@@ -30,11 +28,9 @@
 
         <TextView
             android:id="@+id/textViewNameConnectedDevice"
-            android:layout_width="322dp"
-            android:layout_height="33dp"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="45dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/textViewRouterConnectedDevice"
@@ -45,11 +41,9 @@
 
         <TextView
             android:id="@+id/textViewSubtitle"
-            android:layout_width="275dp"
-            android:layout_height="52dp"
-            android:layout_marginStart="68dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="68dp"
             android:layout_marginBottom="1dp"
             android:textAlignment="center"
             android:textAllCaps="false"
@@ -63,22 +57,21 @@
 
         <View
             android:id="@+id/viewColorSelected"
-            android:layout_width="70dp"
-            android:layout_height="45dp"
+            android:layout_width="101dp"
+            android:layout_height="42dp"
             android:layout_marginStart="150dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="150dp"
-            android:layout_marginBottom="93dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewSelectedColor" />
 
         <TextView
             android:id="@+id/textViewSelectedColor"
-            android:layout_width="266dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="92dp"
-            android:layout_marginEnd="92dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/viewColorSelected"
             app:layout_constraintEnd_toEndOf="parent"
@@ -87,10 +80,10 @@
 
         <top.defaults.colorpicker.ColorPickerView
             android:id="@+id/colorPicker"
-            android:layout_width="318dp"
-            android:layout_height="360dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="62dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="62dp"
             app:enableAlpha="true"
             app:enableBrightness="true"
@@ -99,28 +92,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewRouterConnectedDevice" />
 
-            <ImageView
-                android:id="@+id/imageViewBackArrow"
-                android:layout_width="46dp"
-                android:layout_height="40dp"
-                android:clickable="true"
-                android:soundEffectsEnabled="false"
-                app:tint="#F85F6A"
-                app:layout_constraintEnd_toStartOf="@+id/textViewConnectedDeviceChoice"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="?attr/actionModeCloseDrawable" />
+        <ImageView
+            android:id="@+id/imageViewBackArrow"
+            android:layout_width="46dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            android:soundEffectsEnabled="false"
+            app:layout_constraintEnd_toStartOf="@+id/textViewConnectedDeviceChoice"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="?attr/actionModeCloseDrawable"
+            app:tint="#F85F6A" />
 
         <TextView
             android:id="@+id/textViewChooseColor"
-            android:layout_width="409dp"
-            android:layout_height="46dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="4dp"
             android:textAlignment="center"
-            android:textSize="30sp"
+            android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textViewSubtitle"
             app:layout_constraintEnd_toEndOf="parent"

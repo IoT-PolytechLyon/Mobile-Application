@@ -100,19 +100,24 @@ class LoginFragment : Fragment() {
         })
 
         // when clicking on the login button
-        binding.buttonConnexion.setOnClickListener {
+        binding.buttonConnexion.setOnClickListener(object: View.OnClickListener {
 
-            val email = binding.editTextEmail.text.toString()
-            val password = binding.editTextPassword.text.toString()
+            override fun onClick(view: View?) {
+                val email = binding.editTextEmail.text.toString()
+                val password = binding.editTextPassword.text.toString()
 
-            viewModel.signInFormValidate(email, password)
+                viewModel.signInFormValidate(email, password)
 
-            // if all the data respect formats
-            if (viewModel.signInFormState.value!!.isDataValid) {
-                viewModel.signIn(email, password)
+                // if all the data respect formats
+                if (viewModel.signInFormState.value!!.isDataValid) {
+                    viewModel.signIn(email, password)
+                }
             }
+        })
 
-        }
+
+
+
 
         // when clicking on the sign up button
         binding.buttonNewAccount.setOnClickListener {

@@ -56,6 +56,7 @@ class ChoiceConnectedDeviceFragment : Fragment() {
             viewModel.onConnectedDeviceClicked(connectedDeviceId)
         })
         binding.recyclerViewList.adapter = adapter
+        binding.recyclerViewList
 
         viewModel.connectedDevices.observe(viewLifecycleOwner, Observer {
             it?.let {

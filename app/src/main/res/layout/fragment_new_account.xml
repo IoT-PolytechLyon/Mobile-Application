@@ -12,7 +12,20 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textViewYourAge"
+            android:layout_width="173dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="24dp"
+            android:textSize="18sp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewBirthday"
+            app:layout_constraintTop_toBottomOf="@+id/editTextFirstName" />
 
         <ImageView
             android:id="@+id/imageViewBackArrow"
@@ -20,10 +33,12 @@
             android:layout_height="40dp"
             android:clickable="true"
             android:soundEffectsEnabled="false"
+            app:layout_constraintBottom_toTopOf="@+id/textViewTitleCreateNewAccount"
             app:layout_constraintEnd_toStartOf="@+id/textViewConnectedDeviceChoice"
             app:layout_constraintHorizontal_bias="0.426"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="?attr/actionModeCloseDrawable"
             app:tint="#F85F6A" />
 
@@ -32,12 +47,13 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="2dp"
             android:background="@drawable/edit_text_border"
             android:ems="10"
             android:inputType="textPassword"
+            android:paddingLeft="5dp"
             app:layout_constraintBottom_toTopOf="@+id/editTextAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,10 +64,12 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="16dp"
             android:background="#F85F6A"
+            android:clickable="true"
             android:enabled="true"
             android:textColor="@color/design_default_color_background"
             android:textSize="18sp"
@@ -65,14 +83,14 @@
 
         <TextView
             android:id="@+id/textViewTitleCreateNewAccount"
-            android:layout_width="407dp"
-            android:layout_height="42dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="16dp"
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/spinnerSex"
+            app:layout_constraintBottom_toTopOf="@+id/spinnerGender"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -82,13 +100,15 @@
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="2dp"
             android:background="@drawable/edit_text_border"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="5dp"
             app:layout_constraintBottom_toTopOf="@+id/editTextFirstName"
-            app:layout_constraintEnd_toStartOf="@+id/spinnerSex"
+            app:layout_constraintEnd_toStartOf="@+id/spinnerGender"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTitleCreateNewAccount" />
 
@@ -97,16 +117,17 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="2dp"
             android:background="@drawable/edit_text_border"
             android:ems="10"
             android:inputType="textEmailAddress"
+            android:paddingLeft="5dp"
             app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextAge" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewBirthday" />
 
         <EditText
             android:id="@+id/editTextAddress"
@@ -119,6 +140,7 @@
             android:background="@drawable/edit_text_border"
             android:ems="10"
             android:inputType="textPostalAddress"
+            android:paddingLeft="5dp"
             app:layout_constraintBottom_toTopOf="@+id/editTextCity"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -130,39 +152,42 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="2dp"
             android:background="@drawable/edit_text_border"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="5dp"
             app:layout_constraintBottom_toTopOf="@+id/spinnerCountry"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextAddress" />
 
         <Spinner
-            android:id="@+id/spinnerSex"
+            android:id="@+id/spinnerGender"
+            style="@style/spinner_style"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/spinner"
+            android:layout_marginBottom="2dp"
             android:dropDownWidth="wrap_content"
             android:popupBackground="@color/colorGrey"
             app:layout_constraintBottom_toTopOf="@+id/editTextFirstName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.251"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/editTextLastName"
             app:layout_constraintTop_toBottomOf="@+id/textViewTitleCreateNewAccount" />
 
         <Spinner
             android:id="@+id/spinnerCountry"
+            style="@style/spinner_style"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/spinner"
             android:popupBackground="@color/colorGrey"
             android:spinnerMode="dropdown"
             app:layout_constraintBottom_toTopOf="@+id/buttonCreateAccount"
@@ -175,34 +200,33 @@
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="2dp"
             android:background="@drawable/edit_text_border"
+            android:paddingLeft="5dp"
             android:textAlignment="viewStart"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/editTextAge"
+            app:layout_constraintBottom_toTopOf="@+id/textViewBirthday"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextLastName" />
 
-        <EditText
-            android:id="@+id/editTextAge"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textViewBirthday"
+            android:layout_width="170dp"
             android:layout_height="45dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/edit_text_border"
-            android:digits="0123456789"
-            android:inputType="number"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp"
             android:textAlignment="viewStart"
+            android:textColor="@color/colorBlack"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextFirstName" />
 
@@ -210,9 +234,8 @@
             android:id="@+id/loadingPanel"
             android:layout_width="53dp"
             android:layout_height="54dp"
-            android:layout_marginStart="18dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="1dp"
             android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -225,4 +248,5 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

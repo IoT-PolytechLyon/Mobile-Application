@@ -50,5 +50,7 @@ class MyListAdapter(val clickListener: ConnectedDeviceListener) : ListAdapter<Co
 }
 
 class ConnectedDeviceListener(val clickListener: (connectedDeviceId: String) -> Unit) {
+
+
     fun onClick(connectedDevice: ConnectedDeviceProperties) = clickListener(connectedDevice._id.toString())
 }

@@ -1,11 +1,14 @@
 package com.polytech.bmh
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -18,6 +21,9 @@ import com.polytech.bmh.utils.Utils
 import com.polytech.bmh.viewmodel.NewAccountViewModel
 import com.polytech.bmh.viewmodelfactory.NewAccountViewModelFactory
 import kotlinx.android.synthetic.main.fragment_new_account.*
+import java.text.SimpleDateFormat
+import java.time.Year
+import java.util.*
 
 class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
@@ -46,15 +52,42 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
             textViewTitleCreateNewAccount.text = getString(R.string.title_create_new_account)
             editTextLastName.hint = getString(R.string.user_last_name)
             editTextFirstName.hint = getString(R.string.user_first_name)
-            editTextAge.hint = getString(R.string.user_age)
+            textViewBirthday.hint = getString(R.string.user_birthday)
             editTextEmail.hint = getString(R.string.user_email)
             editTextPassword.hint = getString(R.string.user_password)
             editTextAddress.hint = getString(R.string.user_address)
             editTextCity.hint = getString(R.string.user_city)
             buttonCreateAccount.text = getString(R.string.create_new_account)
+            textViewYourAge.text = getString(R.string.your_age_default)
         }
 
+        // loading panel invisible
         binding.loadingPanel.visibility = View.GONE
+
+        var calendarDateOfBirth = Calendar.getInstance()
+
+        // Date picker
+        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            val sdf = viewModel.formattedDate(calendarDateOfBirth, year, monthOfYear, dayOfMonth)
+            binding.textViewBirthday.text = sdf.format(calendarDateOfBirth.time)
+            binding.textViewYourAge.text = "Votre âge : ${viewModel.dateOfBirthToAge(calendarDateOfBirth).toString()} ans"
+        }
+
+
+        // when clicking on the birthday view
+        binding.textViewBirthday.setOnClickListener {
+            val datePicker = DatePickerDialog(
+                this.requireContext(), dateSetListener, calendarDateOfBirth.get(Calendar.YEAR),
+                calendarDateOfBirth.get(Calendar.MONTH),
+                calendarDateOfBirth.get(Calendar.DAY_OF_MONTH))
+            // max date clickable
+            datePicker.datePicker.maxDate = viewModel.maxDateVisible().timeInMillis
+            // min date clickable
+            datePicker.datePicker.minDate = viewModel.minDateVisible().timeInMillis
+            datePicker.show()
+        }
+
+
 
 
         viewModel.signUpFormState.observe(viewLifecycleOwner, Observer {
@@ -82,8 +115,8 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
             // if the age does not respect the format
             if (newUserValidate.ageError != null) {
-                binding.editTextAge.error = newUserValidate.ageError
-                binding.editTextAge.requestFocus()
+                binding.textViewBirthday.error = newUserValidate.ageError
+                binding.textViewBirthday.requestFocus()
                 Toast.makeText(
                     this.context,
                     "${newUserValidate.ageError}",
@@ -151,8 +184,8 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
             val lastName = binding.editTextLastName.text.toString()
             val firstName = binding.editTextFirstName.text.toString()
-            val sex = binding.spinnerSex.toString()
-            val age = binding.editTextAge.text.toString()
+            val sex = binding.spinnerGender.toString()
+            val age = viewModel.dateOfBirthToAge(calendarDateOfBirth).toString()
             val email = binding.editTextEmail.text.toString()
             val password = binding.editTextPassword.text.toString()
             val address = binding.editTextAddress.text.toString()
@@ -168,12 +201,12 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
         }
 
-        // Sex spinner
-        val arrayFirstAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, viewModel.listOfSex())
+        // Gender spinner
+        val arrayFirstAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, viewModel.listOfGender())
         arrayFirstAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        binding.spinnerSex.adapter = arrayFirstAdapter
-        binding.spinnerSex.onItemSelectedListener = this
+        binding.spinnerGender.adapter = arrayFirstAdapter
+        binding.spinnerGender.onItemSelectedListener = this
 
         // Countries spinner
         val arraySecondAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, viewModel.listOfCountries())

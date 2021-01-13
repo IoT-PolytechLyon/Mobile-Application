@@ -18,6 +18,9 @@
     <string name="user_last_name">Nom</string>
     <string name="user_first_name">Prénom</string>
     <string name="user_age">Age</string>
+    <string name="user_birthday">Date de naissance</string>
+    <string name="your_age_default">Votre âge : ...</string>
+    <string name="your_age">Votre âge :</string>
     <string name="user_email">Email (sera votre identifiant)</string>
     <string name="user_password">Mot de passe</string>
     <string name="user_address">Adresse</string>
