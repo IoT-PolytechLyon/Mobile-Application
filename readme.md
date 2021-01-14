@@ -2,6 +2,8 @@
 
 [_Vidéo de démonstration objet connecté et écosystème applicatif global_](https://www.youtube.com/watch?v=3qnKhdDAtUE)
 
+[Rapport](./Rapport Application Mobile - BENALI Myriam & NAAJI Dorian.pdf)
+
 # Android project
 
 - Myriam BENALI
