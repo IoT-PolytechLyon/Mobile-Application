@@ -6,6 +6,9 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceProperties
 
+/**
+ * Connected device DAO
+ */
 @Dao
 interface ConnectedDeviceDao {
     @Insert

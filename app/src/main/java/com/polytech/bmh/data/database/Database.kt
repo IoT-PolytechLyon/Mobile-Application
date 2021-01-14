@@ -7,6 +7,9 @@ import com.polytech.bmh.data.database.dao.ConnectedDeviceDao
 
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceProperties
 
+/**
+ * Room ConnectedDeviceProperties database
+ */
 @Database(entities = [ConnectedDeviceProperties::class], version = 3, exportSchema = false)
 abstract class Database : RoomDatabase() {
     abstract val connectedDevicesDao: ConnectedDeviceDao

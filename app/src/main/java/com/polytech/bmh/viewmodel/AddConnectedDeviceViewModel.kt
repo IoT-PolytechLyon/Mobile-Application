@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.polytech.bmh.data.Result
+import com.polytech.bmh.data.model.Result
 import com.polytech.bmh.data.model.DataResult
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceAddBodyState
 import com.polytech.bmh.repository.AddConnectedDeviceRepository

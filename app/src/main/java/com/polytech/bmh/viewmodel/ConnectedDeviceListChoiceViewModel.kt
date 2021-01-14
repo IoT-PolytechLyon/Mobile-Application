@@ -4,13 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.polytech.bmh.data.Result
+import com.polytech.bmh.data.model.Result
 import com.polytech.bmh.data.database.dao.ConnectedDeviceDao
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceProperties
 import com.polytech.bmh.repository.ChoiceConnectedDeviceRepository
 import kotlinx.coroutines.*
 
-class ChoiceConnectedDeviceViewModel(
+class ConnectedDeviceListChoiceViewModel(
     private val choiceConnectedDeviceRepository: ChoiceConnectedDeviceRepository,
     private val dataSource: ConnectedDeviceDao) : ViewModel() {
 

@@ -3,10 +3,10 @@ package com.polytech.bmh.repository
 import android.nfc.FormatException
 import android.util.Patterns
 import com.google.gson.JsonParser
-import com.polytech.bmh.data.Result
+import com.polytech.bmh.data.model.Result
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceAddBody
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceAddBodyState
-import com.polytech.bmh.service.AddConnectedDevice
+import com.polytech.bmh.service.ConnectedDeviceService
 import com.polytech.bmh.service.RetrofitInstance
 import retrofit2.await
 import java.lang.Exception
@@ -20,10 +20,10 @@ class AddConnectedDeviceRepository {
     ): Result<ConnectedDeviceAddBody> {
 
         try {
-            val service =
-                RetrofitInstance.getRetrofitInstance().create(AddConnectedDevice::class.java)
+            val connectedDeviceService = RetrofitInstance.getRetrofitInstance().create(
+                ConnectedDeviceService::class.java)
             val addConnectedDeviceRequest =
-                service.addConnectedDevice(ConnectedDeviceAddBody(name, description, router))
+                connectedDeviceService.addConnectedDevice(ConnectedDeviceAddBody(name, description, router))
             val result = addConnectedDeviceRequest.await()
 
             // checks if a field is not valid

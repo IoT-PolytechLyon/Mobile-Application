@@ -1,4 +1,4 @@
-package com.polytech.bmh
+package com.polytech.bmh.controller
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,18 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.polytech.bmh.R
 import com.polytech.bmh.adapter.ConnectedDeviceListener
 import com.polytech.bmh.adapter.MyListAdapter
 import com.polytech.bmh.data.database.Database
 import com.polytech.bmh.data.database.dao.ConnectedDeviceDao
 import com.polytech.bmh.databinding.FragmentChoiceConnectedDeviceBinding
-import com.polytech.bmh.viewmodel.ChoiceConnectedDeviceViewModel
-import com.polytech.bmh.viewmodelfactory.ChoiceConnectedDeviceViewModelFactory
+import com.polytech.bmh.viewmodel.ConnectedDeviceListChoiceViewModel
+import com.polytech.bmh.viewmodelfactory.ConnectedDeviceListChoiceViewModelFactory
 
-class ChoiceConnectedDeviceFragment : Fragment() {
+class ConnectedDeviceListChoiceFragment : Fragment() {
 
     private lateinit var binding: FragmentChoiceConnectedDeviceBinding
-    private lateinit var viewModel: ChoiceConnectedDeviceViewModel
+    private lateinit var viewModel: ConnectedDeviceListChoiceViewModel
     private lateinit var dataSource: ConnectedDeviceDao
 
     override fun onCreateView(
@@ -37,11 +38,11 @@ class ChoiceConnectedDeviceFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         dataSource = Database.getInstance(application).connectedDevicesDao
-        val viewModelFactory = ChoiceConnectedDeviceViewModelFactory(dataSource, application)
+        val viewModelFactory = ConnectedDeviceListChoiceViewModelFactory(dataSource)
         viewModel = ViewModelProvider(
             this,
             viewModelFactory
-        ).get(ChoiceConnectedDeviceViewModel::class.java)
+        ).get(ConnectedDeviceListChoiceViewModel::class.java)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -74,18 +75,22 @@ class ChoiceConnectedDeviceFragment : Fragment() {
 
         // when clicking on the back arrow
         binding.imageBackArrow.setOnClickListener {
-            this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.actionChoiceConnectedDeviceFragmentToLoginFragment())
+            this.findNavController().navigate(ConnectedDeviceListChoiceFragmentDirections.actionChoiceConnectedDeviceFragmentToLoginFragment())
         }
 
         // when clicking on the adding connected device button
         binding.buttonAddConnectedDevice.setOnClickListener {
-            this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.actionChoiceConnectedDeviceFragmentToAddConnectedDeviceFragment())
+            this.findNavController().navigate(ConnectedDeviceListChoiceFragmentDirections.actionChoiceConnectedDeviceFragmentToAddConnectedDeviceFragment())
         }
 
         // when clicking on a specific connected device
         viewModel.connectedDeviceSelectedId.observe(viewLifecycleOwner, Observer {
                 connectedDevice -> connectedDevice?.let {
-            this.findNavController().navigate(ChoiceConnectedDeviceFragmentDirections.actionChoiceConnectedDeviceFragmentToSelectColorFragment(connectedDevice))
+            this.findNavController().navigate(
+                ConnectedDeviceListChoiceFragmentDirections.actionChoiceConnectedDeviceFragmentToSelectColorFragment(
+                    connectedDevice
+                )
+            )
         }
         })
 

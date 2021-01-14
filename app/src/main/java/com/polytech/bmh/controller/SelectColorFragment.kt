@@ -1,4 +1,4 @@
-package com.polytech.bmh
+package com.polytech.bmh.controller
 
 import android.graphics.Color
 import android.os.Bundle
@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.polytech.bmh.R
 import com.polytech.bmh.databinding.FragmentSelectColorBinding
 import com.polytech.bmh.viewmodel.SelectColorViewModel
 import com.polytech.bmh.viewmodelfactory.SelectColorViewModelFactory
@@ -43,25 +44,23 @@ class SelectColorFragment : Fragment() {
         }
 
         // default values
-        var defaultColor = 0
-        var redRgb = 0
-        var greenRgb = 0
-        var blueRgb = 0
+        //var defaultColor = 0
+        //var redRgb = 0
+        //var greenRgb = 0
+        //var blueRgb = 0
 
         // we retrieve the id connected device on which the user has clicked (from the recycler view)
         val args = SelectColorFragmentArgs.fromBundle(requireArguments())
         val connectedDeviceSelectedId = args.connectedDeviceId
 
-        viewModel.getConnectedDeviceById(connectedDeviceSelectedId)
-
-        binding.colorPicker.subscribe { color, fromUser, shouldPropagate ->
+        binding.colorPicker.subscribe { color, _, _ ->
 
             // we display the current color in our view viewColorSelected
             binding.viewColorSelected.setBackgroundColor(color)
 
-            redRgb = Color.red(color)
-            greenRgb = Color.green(color)
-            blueRgb = Color.blue(color)
+            var redRgb = Color.red(color)
+            var greenRgb = Color.green(color)
+            var blueRgb = Color.blue(color)
 
             // updating leds color of the specific connected device
             viewModel.updateConnectedDevice(connectedDeviceSelectedId, redRgb, greenRgb, blueRgb)
@@ -77,12 +76,10 @@ class SelectColorFragment : Fragment() {
             val intBlue = connectedDevice.state.led_state.blue_value
             val color = Color.rgb(intRed, intGreen, intBlue)
 
-            defaultColor = color
-
-            // we display the color in our view viewColorSelected
-            binding.viewColorSelected.setBackgroundColor(defaultColor)
             // the picker is positioned at the color
-            binding.colorPicker.setInitialColor(defaultColor)
+            binding.colorPicker.setInitialColor(color)
+            // we display the color in our view viewColorSelected
+            binding.viewColorSelected.setBackgroundColor(color)
 
             binding.textViewNameConnectedDevice.text = "Nom : ${connectedDevice.name}"
             binding.textViewRouterConnectedDevice.text = "Adresse IP : ${connectedDevice.router}"

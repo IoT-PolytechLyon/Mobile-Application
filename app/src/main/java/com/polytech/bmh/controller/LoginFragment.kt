@@ -1,4 +1,4 @@
-package com.polytech.bmh
+package com.polytech.bmh.controller
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-
+import com.polytech.bmh.R
 import com.polytech.bmh.databinding.FragmentLoginBinding
 import com.polytech.bmh.utils.Utils
 import com.polytech.bmh.viewmodel.LoginViewModel

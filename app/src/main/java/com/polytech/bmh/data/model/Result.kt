@@ -1,4 +1,4 @@
-package com.polytech.bmh.data
+package com.polytech.bmh.data.model
 
 /**
  * A generic class that holds a value with its loading status.

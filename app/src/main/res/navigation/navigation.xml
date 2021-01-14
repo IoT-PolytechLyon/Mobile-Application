@@ -5,7 +5,7 @@
     app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.polytech.bmh.LoginFragment"
+        android:name="com.polytech.bmh.controller.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_choiceConnectedDeviceFragment"
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/choiceConnectedDeviceFragment"
-        android:name="com.polytech.bmh.ChoiceConnectedDeviceFragment"
+        android:name="com.polytech.bmh.controller.ConnectedDeviceListChoiceFragment"
         android:label="ChoiceConnectedDeviceFragment" >
         <action
             android:id="@+id/action_choiceConnectedDeviceFragment_to_loginFragment"
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/addConnectedDeviceFragment"
-        android:name="com.polytech.bmh.AddConnectedDeviceFragment"
+        android:name="com.polytech.bmh.controller.AddConnectedDeviceFragment"
         android:label="AddConnectedDeviceFragment" >
         <action
             android:id="@+id/action_addConnectedDeviceFragment_to_choiceConnectedDeviceFragment"
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/selectColorFragment"
-        android:name="com.polytech.bmh.SelectColorFragment"
+        android:name="com.polytech.bmh.controller.SelectColorFragment"
         android:label="SelectColorFragment" >
         <action
             android:id="@+id/action_selectColorFragment_to_choiceConnectedDeviceFragment"
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/newAccountFragment"
-        android:name="com.polytech.bmh.NewAccountFragment"
+        android:name="com.polytech.bmh.controller.NewAccountFragment"
         android:label="NewAccountFragment" >
         <action
             android:id="@+id/action_newAccountFragment_to_loginFragment"

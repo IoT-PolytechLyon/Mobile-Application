@@ -3,9 +3,9 @@ package com.polytech.bmh.repository
 import com.google.gson.JsonParser
 import com.polytech.bmh.data.model.user.signin.SignInBody
 import com.polytech.bmh.service.RetrofitInstance
-import com.polytech.bmh.service.SignInUser
 import retrofit2.await
-import com.polytech.bmh.data.Result
+import com.polytech.bmh.data.model.Result
+import com.polytech.bmh.service.UserService
 import java.lang.Exception
 import java.net.SocketTimeoutException
 
@@ -17,8 +17,8 @@ class LoginRepository {
     suspend fun signIn(email: String, password: String): Result<SignInBody> {
 
         try {
-            val service = RetrofitInstance.getRetrofitInstance().create(SignInUser::class.java)
-            val signInRequest = service.signIn(SignInBody(email, password))
+            val userService = RetrofitInstance.getRetrofitInstance().create(UserService::class.java)
+            val signInRequest = userService.signIn(SignInBody(email, password))
             val result = signInRequest.await()
             val resultAsJsonObject = JsonParser().parse(result.string())
 

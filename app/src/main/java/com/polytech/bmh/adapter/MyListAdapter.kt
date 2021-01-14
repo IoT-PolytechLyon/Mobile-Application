@@ -8,7 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceProperties
 import com.polytech.bmh.databinding.ItemViewBinding
 
-class MyListAdapter(val clickListener: ConnectedDeviceListener) : ListAdapter<ConnectedDeviceProperties, MyListAdapter.ViewHolder>(UserDiffCallback()) {
+/**
+ * This class makes the link between the view and the data, it prepares the data and its display.
+ * (Used for the RecyclerView)
+ */
+class MyListAdapter(private val clickListener: ConnectedDeviceListener) : ListAdapter<ConnectedDeviceProperties, MyListAdapter.ViewHolder>(UserDiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -49,8 +53,9 @@ class MyListAdapter(val clickListener: ConnectedDeviceListener) : ListAdapter<Co
 
 }
 
+/**
+ * Listener (Used for the RecyclerView)
+ */
 class ConnectedDeviceListener(val clickListener: (connectedDeviceId: String) -> Unit) {
-
-
     fun onClick(connectedDevice: ConnectedDeviceProperties) = clickListener(connectedDevice._id.toString())
 }

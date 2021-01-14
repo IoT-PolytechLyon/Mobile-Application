@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="spinner_style">
-        <item name="android:background">@drawable/spinner_bis</item>
+        <item name="android:background">@drawable/spinner</item>
     </style>
 
 </resources>

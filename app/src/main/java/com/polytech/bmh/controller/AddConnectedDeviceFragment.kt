@@ -1,4 +1,4 @@
-package com.polytech.bmh
+package com.polytech.bmh.controller
 
 import android.app.Activity
 import android.os.Bundle
@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.polytech.bmh.R
 import com.polytech.bmh.databinding.FragmentAddConnectedDeviceBinding
 import com.polytech.bmh.service.*
 import com.polytech.bmh.utils.Utils
@@ -164,6 +165,5 @@ class AddConnectedDeviceFragment : Fragment() {
             Toast.LENGTH_LONG
         ).show()
 
-//        this.findNavController().navigate(R.id.action_loginFragment_self)
     }
 }

@@ -1,6 +1,5 @@
-package com.polytech.bmh
+package com.polytech.bmh.controller
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -8,21 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.polytech.bmh.data.Result
+import com.polytech.bmh.R
+import com.polytech.bmh.data.model.Result
 import com.polytech.bmh.data.model.user.signup.SignUpBody
 import com.polytech.bmh.databinding.FragmentNewAccountBinding
 import com.polytech.bmh.utils.Utils
 import com.polytech.bmh.viewmodel.NewAccountViewModel
 import com.polytech.bmh.viewmodelfactory.NewAccountViewModelFactory
 import kotlinx.android.synthetic.main.fragment_new_account.*
-import java.text.SimpleDateFormat
-import java.time.Year
 import java.util.*
 
 class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -67,7 +64,7 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
         var calendarDateOfBirth = Calendar.getInstance()
 
         // Date picker
-        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             val sdf = viewModel.formattedDate(calendarDateOfBirth, year, monthOfYear, dayOfMonth)
             binding.textViewBirthday.text = sdf.format(calendarDateOfBirth.time)
             binding.textViewYourAge.text = "Votre âge : ${viewModel.dateOfBirthToAge(calendarDateOfBirth).toString()} ans"
@@ -257,7 +254,7 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        var items: String = parent?.getItemAtPosition(position) as String
+        parent?.getItemAtPosition(position) as String
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {

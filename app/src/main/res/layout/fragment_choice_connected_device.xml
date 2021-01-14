@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.polytech.bmh.viewmodel.ChoiceConnectedDeviceViewModel" />
+            type="com.polytech.bmh.viewmodel.ConnectedDeviceListChoiceViewModel" />
     </data>
 
 

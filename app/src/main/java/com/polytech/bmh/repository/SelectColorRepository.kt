@@ -1,13 +1,12 @@
 package com.polytech.bmh.repository
 
-import com.polytech.bmh.data.Result
+import com.polytech.bmh.data.model.Result
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceData
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceState
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceStateLed
 import com.polytech.bmh.data.model.connecteddevice.ConnectedDeviceUpdateBody
-import com.polytech.bmh.service.ConnectedDevicesProperties
+import com.polytech.bmh.service.ConnectedDeviceService
 import com.polytech.bmh.service.RetrofitInstance
-import com.polytech.bmh.service.UpdateConnectedDevice
 import retrofit2.await
 import java.io.IOException
 import java.lang.Exception
@@ -19,8 +18,9 @@ class SelectColorRepository {
      */
     suspend fun getConnectedDeviceById(id: String): Result<ConnectedDeviceData> {
         try {
-            val service = RetrofitInstance.getRetrofitInstance().create(ConnectedDevicesProperties::class.java)
-            val getConnectedDeviceByIdRequest = service.getConnectedDevicesById(id)
+            val connectedDeviceService = RetrofitInstance.getRetrofitInstance().create(
+                ConnectedDeviceService::class.java)
+            val getConnectedDeviceByIdRequest = connectedDeviceService.getConnectedDevicesById(id)
             val getConnectedDeviceByIdResult = getConnectedDeviceByIdRequest.await()
             return Result.Success(getConnectedDeviceByIdResult)
         } catch (e: Throwable) {
@@ -45,9 +45,9 @@ class SelectColorRepository {
                     connectedDevice.state.nfc_state, connectedDeviceLedState
                 )
 
-                val service = RetrofitInstance.getRetrofitInstance().create(UpdateConnectedDevice::class.java)
-                val updateConnectedDeviceRequest = service.updateConnectedDevice(id, ConnectedDeviceUpdateBody(connectedDeviceState))
-                val result = updateConnectedDeviceRequest.await()
+                val connectedDeviceService = RetrofitInstance.getRetrofitInstance().create(ConnectedDeviceService::class.java)
+                val updateConnectedDeviceRequest = connectedDeviceService.updateConnectedDevice(id, ConnectedDeviceUpdateBody(connectedDeviceState))
+                updateConnectedDeviceRequest.await()
 
                 return Result.Success("L'objet connecté a été modifié avec succès !")
             } else {
