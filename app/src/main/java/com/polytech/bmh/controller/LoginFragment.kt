@@ -115,10 +115,6 @@ class LoginFragment : Fragment() {
             }
         })
 
-
-
-
-
         // when clicking on the sign up button
         binding.buttonNewAccount.setOnClickListener {
             this.findNavController()

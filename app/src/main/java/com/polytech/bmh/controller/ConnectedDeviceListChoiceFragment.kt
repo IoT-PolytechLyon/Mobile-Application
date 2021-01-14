@@ -14,13 +14,13 @@ import com.polytech.bmh.adapter.ConnectedDeviceListener
 import com.polytech.bmh.adapter.MyListAdapter
 import com.polytech.bmh.data.database.Database
 import com.polytech.bmh.data.database.dao.ConnectedDeviceDao
-import com.polytech.bmh.databinding.FragmentChoiceConnectedDeviceBinding
+import com.polytech.bmh.databinding.FragmentConnectedDeviceListChoiceBinding
 import com.polytech.bmh.viewmodel.ConnectedDeviceListChoiceViewModel
 import com.polytech.bmh.viewmodelfactory.ConnectedDeviceListChoiceViewModelFactory
 
 class ConnectedDeviceListChoiceFragment : Fragment() {
 
-    private lateinit var binding: FragmentChoiceConnectedDeviceBinding
+    private lateinit var binding: FragmentConnectedDeviceListChoiceBinding
     private lateinit var viewModel: ConnectedDeviceListChoiceViewModel
     private lateinit var dataSource: ConnectedDeviceDao
 
@@ -31,7 +31,7 @@ class ConnectedDeviceListChoiceFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_choice_connected_device,
+            R.layout.fragment_connected_device_list_choice,
             container,
             false
         )

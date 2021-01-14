@@ -189,7 +189,7 @@ class NewAccountFragment : Fragment(), AdapterView.OnItemSelectedListener {
             val city = binding.editTextCity.text.toString()
             val country = binding.spinnerCountry.selectedItem.toString()
 
-            viewModel.signUpFormValidate(lastName, firstName, age, email, password, address, city, country)
+            viewModel.signUpFormValidate(lastName, firstName, age, email, password, address, city)
 
             // if all the data respect formats
             if (viewModel.signUpFormState.value!!.isDataValid) {

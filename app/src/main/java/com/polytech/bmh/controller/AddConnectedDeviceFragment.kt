@@ -75,8 +75,6 @@ class AddConnectedDeviceFragment : Fragment() {
             //adds the new connected object if all fields are valid
             viewModel.addConnectedDevice(connectedDeviceNameValue, connectedDeviceDescriptionValue, connectedDeviceRouterValue)
 
-            //this.findNavController().navigate(AddConnectedDeviceFragmentDirections.actionAddConnectedDeviceFragmentToChoiceConnectedDeviceFragment())
-
         }
 
         viewModel.addNewConnectedDeviceResponse.observe(viewLifecycleOwner, Observer {

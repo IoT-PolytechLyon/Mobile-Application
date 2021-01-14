@@ -40,19 +40,6 @@ class AddConnectedDeviceRepository {
                 return Result.Error(FormatException(errorMessage))
             }
 
-
-
-            // if there are no errors
-            /*if (resultAsJsonObject.asJsonObject["message"].isJsonPrimitive) {
-                // primitive type. There as no errors.
-                return Result.Success(ConnectedDeviceAddBody(name, description, router))
-                // if there is an error
-            } else {
-                // we will look for the error in message.message
-                val errorMessage =
-                    resultAsJsonObject.asJsonObject["message"].asJsonObject["message"].asString
-                return Result.Error(FormatException("$errorMessage"))
-            }*/
         } catch (e: Exception) {
             return Result.Error(
                 Exception(
@@ -86,7 +73,9 @@ class AddConnectedDeviceRepository {
         return Patterns.IP_ADDRESS.matcher(router).matches()
     }
 
-
+    /**
+     * Function that indicates if the data are in the right format
+     */
     fun validateConnectedDeviceBody(name: String, description: String, router: String) : ConnectedDeviceAddBodyState {
         if(!isConnectedDeviceNameValid(name)) {
             return ConnectedDeviceAddBodyState(nameError = "Le nom de l'objet connecté est invalide ! (il ne doit pas être vide)")

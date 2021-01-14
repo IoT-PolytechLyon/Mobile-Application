@@ -26,37 +26,5 @@ data class ConnectedDeviceProperties(
     var description: String? = "",
     @ColumnInfo(name = "router")
     var router: String? = ""
-) : Parcelable, BaseObservable() {
+)
 
-
-
-
-    constructor(parcel: Parcel) : this(
-        parcel.readLong(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString()
-    )
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(_id)
-        parcel.writeString(name)
-        parcel.writeString(description)
-        parcel.writeString(router)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<ConnectedDeviceProperties> {
-        override fun createFromParcel(parcel: Parcel): ConnectedDeviceProperties {
-            return ConnectedDeviceProperties(parcel)
-        }
-
-        override fun newArray(size: Int): Array<ConnectedDeviceProperties?> {
-            return arrayOfNulls(size)
-        }
-    }
-}

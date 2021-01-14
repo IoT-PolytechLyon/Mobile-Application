@@ -43,15 +43,11 @@ class SelectColorFragment : Fragment() {
             textViewSelectedColor.text = getString(R.string.current_color_leds)
         }
 
-        // default values
-        //var defaultColor = 0
-        //var redRgb = 0
-        //var greenRgb = 0
-        //var blueRgb = 0
-
         // we retrieve the id connected device on which the user has clicked (from the recycler view)
         val args = SelectColorFragmentArgs.fromBundle(requireArguments())
         val connectedDeviceSelectedId = args.connectedDeviceId
+
+        viewModel.getConnectedDeviceById(connectedDeviceSelectedId)
 
         binding.colorPicker.subscribe { color, _, _ ->
 

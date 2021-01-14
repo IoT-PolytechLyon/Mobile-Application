@@ -60,7 +60,7 @@ class NewAccountViewModel(private val newAccountRepository: NewAccountRepository
     /**
      * Function that indicates if the data are in the right format
      */
-    fun signUpFormValidate(lastName: String, firstName: String, age: String, email: String, password: String, address: String, city: String, country: String) {
+    fun signUpFormValidate(lastName: String, firstName: String, age: String, email: String, password: String, address: String, city: String) {
 
         var ageInt = 0
         if (age != "") {
